@@ -9,12 +9,16 @@ find_package(TagLib REQUIRED)
 find_package(WavPack REQUIRED)
 
 include_directories(${PROJECT_SOURCE_DIR}/lib/libdsdpcm
+                    ${PROJECT_SOURCE_DIR}/lib/libdstdec
+                    ${PROJECT_SOURCE_DIR}/lib/libdstdec/binding
+                    ${PROJECT_SOURCE_DIR}/lib/libdstdec/decoder
                     ${KODI_INCLUDE_DIR}/..
                     ${iconv_INCLUDE_DIRS}
                     ${TAGLIB_INCLUDE_DIRS}
                     ${WAVPACK_INCLUDE_DIRS})
 
 add_subdirectory(lib/libdsdpcm)
+add_subdirectory(lib/libdstdec)
 
 set(SACD_SOURCES src/Addon.cpp
                  src/SACDAudio.cpp
@@ -24,7 +28,7 @@ set(SACD_HEADERS src/Addon.h
                  src/SACDAudio.h
                  src/Settings.h)
 
-set(DEPLIBS dsdpcm ${WAVPACK_LIBRARIES} ${TAGLIB_LIBRARIES} ${ICONV_LIBRARY})
+set(DEPLIBS dsdpcm dstdec ${WAVPACK_LIBRARIES} ${TAGLIB_LIBRARIES} ${ICONV_LIBRARY})
 
 build_addon(audiodecoder.sacd SACD DEPLIBS)
 
