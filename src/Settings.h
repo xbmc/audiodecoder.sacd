@@ -21,7 +21,13 @@ public:
   bool Load();
   bool SetSetting(const std::string& settingName, const kodi::CSettingValue& settingValue);
 
-
 private:
   CSACDSettings() = default;
+
+  float m_volumeAdjust = 0.0f;
+  float m_lfeAdjust = 0.0f;
+  int m_samplerate = 352800;
+  int m_dsd2pcmMode = 0;
+  std::string m_dsd2pcmFirFile;
+  int m_speakerArea = 0;
 };
