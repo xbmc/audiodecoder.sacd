@@ -1,0 +1,21 @@
+Source: kodi-audiodecoder-sacd
+Priority: extra
+Maintainer: Nobody <nobody@kodi.tv>
+Build-Depends: debhelper (>= 9.0.0), cmake, kodi-addon-dev
+Standards-Version: 4.1.2
+Section: libs
+Homepage: https://kodi.tv
+
+Package: kodi-audiodecoder-sacd
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: SACD audio decoder for Kodi
+  SACD audio decoder for Kodi
+
+Package: kodi-audiodecoder-sacd-dbg
+Section: debug
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: debug symbols for SACD audio decoder for Kodi
+  debug symbols for SACD audio decoder for Kodi
