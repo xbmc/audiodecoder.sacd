@@ -1,7 +1,8 @@
 Source: kodi-audiodecoder-sacd
 Priority: extra
 Maintainer: Nobody <nobody@kodi.tv>
-Build-Depends: debhelper (>= 9.0.0), cmake, kodi-addon-dev
+Build-Depends: debhelper (>= 9.0.0), cmake, kodi-addon-dev,
+               libwavpack-dev, libtag1-dev
 Standards-Version: 4.1.2
 Section: libs
 Homepage: https://kodi.tv

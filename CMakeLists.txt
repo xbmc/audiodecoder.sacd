@@ -4,8 +4,14 @@ project(audiodecoder.sacd)
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR})
 
 find_package(Kodi REQUIRED)
+find_package(Iconv REQUIRED)
+find_package(TagLib REQUIRED)
+find_package(WavPack REQUIRED)
 
-include_directories(${KODI_INCLUDE_DIR}/..)
+include_directories(${KODI_INCLUDE_DIR}/..
+                    ${iconv_INCLUDE_DIRS}
+                    ${TAGLIB_INCLUDE_DIRS}
+                    ${WAVPACK_INCLUDE_DIRS})
 
 set(SACD_SOURCES src/Addon.cpp
                  src/SACDAudio.cpp
@@ -14,6 +20,8 @@ set(SACD_SOURCES src/Addon.cpp
 set(SACD_HEADERS src/Addon.h
                  src/SACDAudio.h
                  src/Settings.h)
+
+set(DEPLIBS ${WAVPACK_LIBRARIES} ${TAGLIB_LIBRARIES} ${ICONV_LIBRARY})
 
 build_addon(audiodecoder.sacd SACD DEPLIBS)
 
