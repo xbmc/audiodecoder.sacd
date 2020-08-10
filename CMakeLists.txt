@@ -5,10 +5,10 @@ list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR})
 
 find_package(Kodi REQUIRED)
 find_package(Iconv REQUIRED)
-find_package(TagLib REQUIRED)
 find_package(WavPack REQUIRED)
 
-include_directories(${PROJECT_SOURCE_DIR}/lib/libdsdpcm
+include_directories(${PROJECT_SOURCE_DIR}/lib/id3v2lib/include
+                    ${PROJECT_SOURCE_DIR}/lib/libdsdpcm
                     ${PROJECT_SOURCE_DIR}/lib/libdstdec
                     ${PROJECT_SOURCE_DIR}/lib/libdstdec/binding
                     ${PROJECT_SOURCE_DIR}/lib/libdstdec/decoder
@@ -17,6 +17,7 @@ include_directories(${PROJECT_SOURCE_DIR}/lib/libdsdpcm
                     ${TAGLIB_INCLUDE_DIRS}
                     ${WAVPACK_INCLUDE_DIRS})
 
+add_subdirectory(lib/id3v2lib)
 add_subdirectory(lib/libdsdpcm)
 add_subdirectory(lib/libdstdec)
 
@@ -28,7 +29,7 @@ set(SACD_HEADERS src/Addon.h
                  src/SACDAudio.h
                  src/Settings.h)
 
-set(DEPLIBS dsdpcm dstdec ${WAVPACK_LIBRARIES} ${TAGLIB_LIBRARIES} ${ICONV_LIBRARY})
+set(DEPLIBS dsdpcm dstdec id3v2 ${WAVPACK_LIBRARIES} ${ICONV_LIBRARY})
 
 build_addon(audiodecoder.sacd SACD DEPLIBS)
 
