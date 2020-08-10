@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="audiodecoder.sacd"
-  version="0.0.0"
+  version="0.1.0"
   name="SACD ISO support"
   provider-name="Team Kodi, AlwinEsch">
   <requires>@ADDON_DEPENDS@</requires>
   <extension
     point="kodi.audiodecoder"
     name="sacd"
-    extension=".dsf|.dff|.iso|.sacdstream|.wv"
+    extension=".iso|.sacdstream"
     tracks="true"
     tags="true"
     library_@PLATFORM@="@LIBRARY_FILENAME@"/>
