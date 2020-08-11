@@ -21,13 +21,19 @@
 #include <stdio.h>
 #include "DSDPCMConverterEngine.h"
 
+#ifdef BUILD_KODI_ADDON
+#include <kodi/General.h>
+
+#define LOG_ERROR   ADDON_LOG_ERROR
+#define LOG_WARNING ADDON_LOG_WARNING
+#define LOG_INFO    ADDON_LOG_INFO
+#define LOG(p1, p2) kodi::Log(p1, "%s", p2)
+#else
 #define LOG_ERROR   ("Error: ")
 #define LOG_WARNING ("Warning: ")
 #define LOG_INFO    ("Info: ")
-#define LOG(p1, p2) console_fprintf(nullptr, "%s%s", p1, p2)
-
-extern void console_fprintf(FILE* file, const char* fmt, ...);
-extern void console_vfprintf(FILE* file, const char* fmt, va_list vl);
+#define LOG(p1, p2) fprintf(stderr, "%s%s", p1, p2)
+#endif
 
 template<typename real_t>
 void converter_thread(DSDPCMConverterSlot<real_t>* slot) {
