@@ -17,10 +17,10 @@
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 */
 
-#include <malloc.h>
 #include <memory.h>
 #include <stdio.h>
 #include <stdarg.h>
+#include <stdlib.h>
 #include "dst_decoder_mt.h"
 
 #define DSD_SILENCE_BYTE 0x69
