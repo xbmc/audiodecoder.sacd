@@ -12,6 +12,7 @@ if(PKG_CONFIG_FOUND)
 endif()
 
 find_path(WAVPACK_INCLUDE_DIRS NAMES wavpack.h
+                                     wavpack/wavpack.h
                                PATHS ${PC_WAVPACK_INCLUDEDIR})
 find_library(WAVPACK_LIBRARIES NAMES wavpack
                                PATHS ${PC_WAVPACK_LIBDIR})
