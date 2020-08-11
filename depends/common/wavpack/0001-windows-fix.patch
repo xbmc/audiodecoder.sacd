@@ -1,0 +1,23 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -6,14 +6,14 @@ project(WavPack VERSION 5.2.0)
+ 
+ include(CheckLanguage)
+ 
+-check_language(ASM)
+-if(CMAKE_ASM_COMPILER)
+-  enable_language(ASM)
+-endif()
+-
+ if(MSVC)
+   enable_language(ASM_MASM)
+ else()
++  check_language(ASM)
++  if(CMAKE_ASM_COMPILER)
++    enable_language(ASM)
++  endif()
++
+   check_language(ASM-ATT)
+   if(CMAKE_ASM-ATT_COMPILER)
+     enable_language(ASM-ATT)
+

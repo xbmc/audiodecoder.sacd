@@ -50,11 +50,11 @@ inline void kodiLog(const AddonLog logLevel, const char* format, ...)
 
 namespace dst {
 
-auto GET_BIT = [](auto base, auto index) {
+const auto GET_BIT = [](auto base, auto index) {
 	return (((unsigned char*)base)[index >> 3] >> (7 - (index & 7))) & 1;
 };
 
-auto GET_NIBBLE = [](auto base, auto index) {
+const auto GET_NIBBLE = [](auto base, auto index) {
 	return (((unsigned char*)base)[index >> 1] >> ((index & 1) << 2)) & 0x0f;
 };
 

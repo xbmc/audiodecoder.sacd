@@ -13,6 +13,8 @@
 
 #include "sacd_dsf.h"
 
+#include <algorithm>
+
 sacd_dsf_t::sacd_dsf_t()
 {
   for (int i = 0; i < 256; i++)

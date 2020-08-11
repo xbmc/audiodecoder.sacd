@@ -13,6 +13,8 @@
 
 #include "sacd_dsdiff.h"
 
+#include <algorithm>
+
 sacd_dsdiff_t::sacd_dsdiff_t()
 {
   m_mode = ACCESS_MODE_NULL;

@@ -13,6 +13,7 @@
 
 #include "sacd_disc.h"
 
+#include <algorithm>
 #include <iconv.h>
 #include <kodi/General.h>
 #include <sstream>

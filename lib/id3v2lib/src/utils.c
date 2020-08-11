@@ -753,6 +753,9 @@ char* convert_genre_number(int number)
 	case ID_PSYBIENT:
 	    genre = PSYBIENT;
 	    break;
+	default:
+	    genre = "";
+	    break;
     }
 
     return genre;
