@@ -1,1 +1,0 @@
-taglib https://github.com/taglib/taglib/releases/download/v1.11.1/taglib-1.11.1.tar.gz
