@@ -17,9 +17,11 @@
 
 #include <memory>
 
-std::string getFileExt(const std::string& s)
+namespace
 {
 
+std::string getFileExt(const std::string& s)
+{
   size_t i = s.rfind('.', s.length());
   if (i != std::string::npos)
   {
@@ -27,17 +29,6 @@ std::string getFileExt(const std::string& s)
   }
 
   return ("");
-}
-
-void replaceExt(std::string& s, const std::string& newExt)
-{
-
-  std::string::size_type i = s.rfind('.', s.length());
-
-  if (i != std::string::npos)
-  {
-    s.replace(i + 1, newExt.length(), newExt);
-  }
 }
 
 bool icasecmp(const std::string& l, const std::string& r)
@@ -48,6 +39,7 @@ bool icasecmp(const std::string& l, const std::string& r)
                                        });
 }
 
+} /* namespace */
 
 bool sacd_core_t::g_is_our_content_type(const std::string& p_type)
 {
