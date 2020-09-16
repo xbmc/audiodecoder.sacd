@@ -1,0 +1,10 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -60,6 +60,7 @@ option(WAVPACK_ENABLE_DSD "Enable support for WavPack DSD files" ON)
+ option(WAVPACK_INSTALL_CMAKE_MODULE "Generate and install CMake package configuration module" ON)
+ option(WAVPACK_INSTALL_DOCS "Install documentation" ON)
+ option(WAVPACK_INSTALL_PKGCONFIG_MODULE "Generate and install wavpack.pc" ON)
++option(COMPILER_SUPPORTS_SYMBOL_MAPS "To set manually the support about" OFF)
+ 
+ # Configuration tests
+ 

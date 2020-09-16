@@ -12,7 +12,7 @@
 bool CSACDSettings::Load()
 {
   m_volumeAdjust = kodi::GetSettingFloat("volume-adjust", 0.0f);
-  m_lfeAdjust = pow(10.0f, kodi::GetSettingFloat("volume-lfe", 0.0f) / 20.0f);
+  m_lfeAdjust = pow(10.0f, kodi::GetSettingFloat("lfe-adjust", 0.0f) / 20.0f);
   m_samplerate = kodi::GetSettingInt("samplerate", 352800);
   m_dsd2pcmMode = kodi::GetSettingInt("dsd2pcm-mode", 0);
   m_dsd2pcmFirFile = kodi::GetSettingString("firconverter", "");
