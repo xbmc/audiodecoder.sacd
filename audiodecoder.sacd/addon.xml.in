@@ -9,6 +9,7 @@
     point="kodi.audiodecoder"
     name="sacd"
     extension=".iso|.sacdstream"
+    tracks="true"
     tags="true"
     library_@PLATFORM@="@LIBRARY_FILENAME@"/>
   <extension point="xbmc.addon.metadata">
