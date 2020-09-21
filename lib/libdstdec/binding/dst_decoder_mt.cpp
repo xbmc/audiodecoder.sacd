@@ -37,8 +37,7 @@ void dst_run_thread(frame_slot_t* slot) {
 			slot->dsd_data = nullptr;
 			slot->dst_size = 0;
 		}
-		slot->dsd_semaphore.notify();
-    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+		slot->dsd_semaphore.notify();    
 	}
 }
 
@@ -87,8 +86,7 @@ int dst_decoder_t::init(int channels, int samplerate, int framerate) {
 }
 
 int dst_decoder_t::decode(uint8_t* dst_data, size_t dst_size, uint8_t** dsd_data, size_t* dsd_size) {
-
-    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+   
 	/* Get current slot */
 	frame_slot_t& slot_set = frame_slots[slot_nr];
 
