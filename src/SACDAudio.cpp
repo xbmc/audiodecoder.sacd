@@ -181,7 +181,7 @@ int CSACDAudioDecoder::ReadPCM(uint8_t* buffer, int size, int& actualsize)
         case frame_type_e::DST:
           if (!m_dstDecoder)
           {
-            m_dstDecoder = std::make_unique<dst_decoder_t>(m_dstThreads);
+            m_dstDecoder = std::make_unique<dst_decoder_t>(1);
             if (!m_dstDecoder ||
                 m_dstDecoder->init(sacd_reader->get_channels(), sacd_reader->get_samplerate(),
                                    sacd_reader->get_framerate()) != 0)
