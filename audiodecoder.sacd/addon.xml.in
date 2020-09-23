@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="audiodecoder.sacd"
-  version="0.1.1"
+  version="0.1.2"
   name="SACD ISO support"
   provider-name="Team Kodi, AlwinEsch">
   <requires>@ADDON_DEPENDS@</requires>
@@ -9,6 +9,7 @@
     point="kodi.audiodecoder"
     name="sacd"
     extension=".iso|.sacdstream"
+    tracks="true"
     tags="true"
     library_@PLATFORM@="@LIBRARY_FILENAME@"/>
   <extension point="xbmc.addon.metadata">
