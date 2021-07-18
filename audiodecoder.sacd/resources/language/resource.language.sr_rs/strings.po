@@ -17,6 +17,14 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
+msgctxt "Addon Summary"
+msgid "Super Audio CD ISO image"
+msgstr ""
+
+msgctxt "Addon Description"
+msgid "This addon allows Kodi to read content from a Super Audio CD ISO image.[CR][CR]Super Audio CD (SACD) is a read-only optical disc format for audio storage, introduced in 1999, developed jointly by Sony and Philips Electronics to be the successor to the Compact Disc.[CR][CR]The SACD format offers more audio channels (e.g. surround sound), a higher bit rate, and longer playing time than a conventional CD."
+msgstr ""
+
 #[Consistency] Make terms, settings names, brands and other minutiae, consistent throughout file.
 #[Capitalization] Avoid capitalizing every second word. See http://grammarist.com/capitalization/
 #For example, prefer wording as "This new string" instead of "This New String".
