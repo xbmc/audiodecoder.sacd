@@ -13,6 +13,20 @@
     tags="true"
     library_@PLATFORM@="@LIBRARY_FILENAME@"/>
   <extension point="xbmc.addon.metadata">
+
+Super Audio CD (SACD) ist ein schreibgeschütztes optisches Disc-Format für die Audiospeicherung, das 1999 eingeführt wurde und von Sony und Philips Electronics gemeinsam als Nachfolger der Compact Disc entwickelt wurde.
+
+Das SACD-Format bietet mehr Audiokanäle (z. B. Surround-Sound), eine höhere Bitrate und eine längere Wiedergabezeit als eine herkömmliche CD.</description>
+
+Super Audio CD (SACD) is a read-only optical disc format for audio storage, introduced in 1999, developed jointly by Sony and Philips Electronics to be the successor to the Compact Disc.
+
+The SACD format offers more audio channels (e.g. surround sound), a higher bit rate, and longer playing time than a conventional CD.</description>
+    <platform>@PLATFORM@</platform>
+    <license>GPL-2.0-or-later</license>
+    <source>https://github.com/xbmc/audiodecoder.sacd</source>
+    <assets>
+      <icon>icon.png</icon>
+    </assets>
     <summary lang="de_DE">Super Audio CD ISO-Image</summary>
     <summary lang="en_GB">Super Audio CD ISO image</summary>
     <description lang="de_DE">Mit diesem Addon kann Kodi Inhalte von einem Super Audio CD ISO-Image lesen.
@@ -25,11 +39,5 @@ Das SACD-Format bietet mehr Audiokanäle (z. B. Surround-Sound), eine höhere Bi
 Super Audio CD (SACD) is a read-only optical disc format for audio storage, introduced in 1999, developed jointly by Sony and Philips Electronics to be the successor to the Compact Disc.
 
 The SACD format offers more audio channels (e.g. surround sound), a higher bit rate, and longer playing time than a conventional CD.</description>
-    <platform>@PLATFORM@</platform>
-    <license>GPL-2.0-or-later</license>
-    <source>https://github.com/xbmc/audiodecoder.sacd</source>
-    <assets>
-      <icon>icon.png</icon>
-    </assets>
   </extension>
 </addon>
