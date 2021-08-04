@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Addons\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2021-07-26 16:29+0000\n"
+"PO-Revision-Date: 2021-08-04 12:29+0000\n"
 "Last-Translator: Christian Gade <gade@kodi.tv>\n"
 "Language-Team: Danish <https://kodi.weblate.cloud/projects/kodi-add-ons-audio-decodersencoders/audiodecoder-sacd/da_dk/>\n"
 "Language: da_dk\n"
@@ -23,7 +23,7 @@ msgstr "Super Audio CD ISO-billede"
 
 msgctxt "Addon Description"
 msgid "This addon allows Kodi to read content from a Super Audio CD ISO image.[CR][CR]Super Audio CD (SACD) is a read-only optical disc format for audio storage, introduced in 1999, developed jointly by Sony and Philips Electronics to be the successor to the Compact Disc.[CR][CR]The SACD format offers more audio channels (e.g. surround sound), a higher bit rate, and longer playing time than a conventional CD."
-msgstr ""
+msgstr "Dette addon gør det muligt for Kodi at læse indhold fra et Super Audio CD ISO-billede.[CR][CR]Super Audio CD (SACD) er et skrivebeskyttet optisk diskformat til lydopbevaring, introduceret i 1999, udviklet i fællesskab af Sony og Philips Electronics at blive efterfølgeren til Compact Disc.[CR][CR]SACD -formatet tilbyder flere lydkanaler (f.eks. surround-lyd), en højere bithastighed og længere spilletid end en konventionel CD."
 
 # [Consistency] Make terms, settings names, brands and other minutiae, consistent throughout file.
 # [Capitalization] Avoid capitalizing every second word. See http://grammarist.com/capitalization/
@@ -54,7 +54,7 @@ msgstr "PCM samplerate"
 
 msgctxt "#30025"
 msgid "Sample rate to which the stream is reduced."
-msgstr ""
+msgstr "Samplehastighed, hvortil streamen reduceres."
 
 msgctxt "#30026"
 msgid "DSD2PCM mode"
@@ -62,15 +62,15 @@ msgstr "DSD2PCM tilstand"
 
 msgctxt "#30027"
 msgid "Processing mode of the stream to perform the best possible resampling."
-msgstr ""
+msgstr "Processeringstilstand af streamen for at udføre den bedst mulige gensampling."
 
 msgctxt "#30028"
 msgid "Multistage (32fp)"
-msgstr ""
+msgstr "Flertrins (32fp)"
 
 msgctxt "#30029"
 msgid "Multistage (64fp)"
-msgstr ""
+msgstr "Flertrins (64fp)"
 
 msgctxt "#30030"
 msgid "Direct (32fp, 30kHz lowpass)"
@@ -94,11 +94,11 @@ msgstr "Vælg fil med anvendeligt FIR-filter"
 
 msgctxt "#30035"
 msgid "To select finite impulse response (FIR) filter data stored in a file."
-msgstr ""
+msgstr "For at vælge endelige impulsrespons (FIR) filterdata, der er gemt i en fil."
 
 msgctxt "#30036"
 msgid "FIR filter file"
-msgstr ""
+msgstr "Fil til FIR-filter"
 
 msgctxt "#30037"
 msgid "Preferable area"
@@ -106,7 +106,7 @@ msgstr "Foretrukket område"
 
 msgctxt "#30038"
 msgid "To select the songs for the respective number of speakers."
-msgstr ""
+msgstr "For at vælge sangene til det respektive antal højttalere."
 
 msgctxt "#30039"
 msgid "All"
