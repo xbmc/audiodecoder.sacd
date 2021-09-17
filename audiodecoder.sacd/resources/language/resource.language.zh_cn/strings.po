@@ -5,24 +5,25 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Addons\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/audiodecoder.sacd/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-09-17 03:30+0000\n"
+"Last-Translator: taxigps <taxigps@sina.com>\n"
+"Language-Team: Chinese (China) <https://kodi.weblate.cloud/projects/kodi-add-ons-audio-decodersencoders/audiodecoder-sacd/zh_cn/>\n"
 "Language: zh_cn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.8\n"
 
 msgctxt "Addon Summary"
 msgid "Super Audio CD ISO image"
-msgstr ""
+msgstr "超级音频 CD ISO 映像"
 
 msgctxt "Addon Description"
 msgid "This addon allows Kodi to read content from a Super Audio CD ISO image.[CR][CR]Super Audio CD (SACD) is a read-only optical disc format for audio storage, introduced in 1999, developed jointly by Sony and Philips Electronics to be the successor to the Compact Disc.[CR][CR]The SACD format offers more audio channels (e.g. surround sound), a higher bit rate, and longer playing time than a conventional CD."
-msgstr ""
+msgstr "此插件允许 Kodi 从超级音频 CD ISO 映像中读取内容。[CR][CR]超级音频 CD（SACD）是一种用于音频存储的只读光盘格式，作为光盘的继任者于1999年推出，由索尼和飞利浦电子共同开发。[CR][CR]SACD 格式提供更多音频通道（例如环绕声），比传统 CD 具有更高的比特率和更长的播放时间。"
 
 # [Consistency] Make terms, settings names, brands and other minutiae, consistent throughout file.
 # [Capitalization] Avoid capitalizing every second word. See http://grammarist.com/capitalization/
@@ -33,108 +34,108 @@ msgstr ""
 # For example, "Press \"OK\" for \"All seasons\"" instead of "Press OK for All seasons" after first word.
 msgctxt "#30020"
 msgid "Volume adjust"
-msgstr ""
+msgstr "音量调节"
 
 msgctxt "#30021"
 msgid "To change speaker volume with setting value during playback."
-msgstr ""
+msgstr "在播放过程中使用设置值更改扬声器音量。"
 
 msgctxt "#30022"
 msgid "LFE adjust"
-msgstr ""
+msgstr "重低音调节"
 
 msgctxt "#30023"
 msgid "To change LFE volume with setting value during playback."
-msgstr ""
+msgstr "在播放过程中使用设置值更改重低音音量。"
 
 msgctxt "#30024"
 msgid "PCM Samplerate"
-msgstr ""
+msgstr "PCM 采样率"
 
 msgctxt "#30025"
 msgid "Sample rate to which the stream is reduced."
-msgstr ""
+msgstr "音频流减少采样率。"
 
 msgctxt "#30026"
 msgid "DSD2PCM mode"
-msgstr ""
+msgstr "DSD2PCM 模式"
 
 msgctxt "#30027"
 msgid "Processing mode of the stream to perform the best possible resampling."
-msgstr ""
+msgstr "流的处理模式，以执行尽可能最佳的重采样。"
 
 msgctxt "#30028"
 msgid "Multistage (32fp)"
-msgstr ""
+msgstr "多级（32fp）"
 
 msgctxt "#30029"
 msgid "Multistage (64fp)"
-msgstr ""
+msgstr "多级（64fp）"
 
 msgctxt "#30030"
 msgid "Direct (32fp, 30kHz lowpass)"
-msgstr ""
+msgstr "直接（32fp，30kHz低通）"
 
 msgctxt "#30031"
 msgid "Direct (64fp, 30kHz lowpass)"
-msgstr ""
+msgstr "直接（64fp，30kHz低通）"
 
 msgctxt "#30032"
 msgid "Installable FIR (32fp)"
-msgstr ""
+msgstr "FIR 可安装（32fp）"
 
 msgctxt "#30033"
 msgid "Installable FIR (64fp)"
-msgstr ""
+msgstr "FIR 可安装（64fp）"
 
 msgctxt "#30034"
 msgid "Select file with usable FIR filter"
-msgstr ""
+msgstr "选择带有可用 FIR 滤波器的文件"
 
 msgctxt "#30035"
 msgid "To select finite impulse response (FIR) filter data stored in a file."
-msgstr ""
+msgstr "选择存储在文件中的有限脉冲响应（FIR）滤波器数据。"
 
 msgctxt "#30036"
 msgid "FIR filter file"
-msgstr ""
+msgstr "FIR 滤波器文件"
 
 msgctxt "#30037"
 msgid "Preferable area"
-msgstr ""
+msgstr "优选区域"
 
 msgctxt "#30038"
 msgid "To select the songs for the respective number of speakers."
-msgstr ""
+msgstr "为相应数量的扬声器选择歌曲。"
 
 msgctxt "#30039"
 msgid "All"
-msgstr ""
+msgstr "全部"
 
 msgctxt "#30040"
 msgid "Stereo"
-msgstr ""
+msgstr "立体声"
 
 msgctxt "#30041"
 msgid "Multichannel"
-msgstr ""
+msgstr "多声道"
 
 msgctxt "#30042"
 msgid "44.1 kHz"
-msgstr ""
+msgstr "44.1 kHz"
 
 msgctxt "#30043"
 msgid "88.2 kHz"
-msgstr ""
+msgstr "88.2 kHz"
 
 msgctxt "#30044"
 msgid "176.4 kHz"
-msgstr ""
+msgstr "176.4 kHz"
 
 msgctxt "#30045"
 msgid "352.8 kHz"
-msgstr ""
+msgstr "352.8 kHz"
 
 msgctxt "#30070"
 msgid "{0:.0f} db"
-msgstr ""
+msgstr "{0:.0f} db"
