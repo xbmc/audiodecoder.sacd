@@ -139,5 +139,3 @@ msgstr ""
 msgctxt "#30070"
 msgid "{0:.0f} db"
 msgstr ""
-
-
