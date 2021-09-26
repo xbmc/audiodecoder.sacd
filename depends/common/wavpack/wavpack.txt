@@ -1,1 +1,1 @@
-wavpack https://github.com/dbry/WavPack/releases/download/5.3.0/wavpack-5.3.0.tar.xz
+wavpack https://github.com/dbry/WavPack/releases/download/5.4.0/wavpack-5.4.0.tar.xz
