@@ -22,6 +22,8 @@
 #include "DSDPCMConstants.h"
 #include "DSDPCMUtil.h"
 
+#include <math.h>
+
 template<typename real_t>
 class DSDPCMFilterSetup	{
 	using ctable_t = real_t[256];
