@@ -58,18 +58,18 @@ public:
 	float get_delay() {
 		return (float)fir_order / 2 / decimation;
 	}
-	void init(real_t* fir_coefs, int fir_length, int decimation) {
-		this->fir_coefs = fir_coefs;
-		this->fir_length = fir_length;
-		this->decimation = decimation;
-		fir_order = fir_length - 1;
-		fir_dly = (sizeof(real_t) == sizeof(float)) ? reinterpret_cast<real_t*>(ippsMalloc_32f(fir_length)) : reinterpret_cast<real_t*>(ippsMalloc_64f(fir_length));
+	void init(real_t* p_fir_coefs, int p_fir_length, int p_decimation) {
+		fir_coefs = p_fir_coefs;
+		fir_length = p_fir_length;
+		decimation = p_decimation;
+		fir_order = p_fir_length - 1;
+		fir_dly = (sizeof(real_t) == sizeof(float)) ? reinterpret_cast<real_t*>(ippsMalloc_32f(p_fir_length)) : reinterpret_cast<real_t*>(ippsMalloc_64f(p_fir_length));
 		int specSize = 0;
 		int bufSize = 0;
-		ippsFIRMRGetSize(fir_length, 1, decimation, (sizeof(real_t) == sizeof(float)) ? ipp32f : ipp64f, &specSize, &bufSize);
+		ippsFIRMRGetSize(p_fir_length, 1, p_decimation, (sizeof(real_t) == sizeof(float)) ? ipp32f : ipp64f, &specSize, &bufSize);
 		fir_buf = ippsMalloc_8u(bufSize);
 		fir_spec = reinterpret_cast<IppsFIRSpec*>(ippsMalloc_8u(specSize));
-		Fir_IPP::FIRMRInit(fir_coefs, fir_length, 1, 0, decimation, 0, fir_spec);
+		Fir_IPP::FIRMRInit(p_fir_coefs, p_fir_length, 1, 0, p_decimation, 0, fir_spec);
  	}
 	void free() {
 		if (fir_spec) {

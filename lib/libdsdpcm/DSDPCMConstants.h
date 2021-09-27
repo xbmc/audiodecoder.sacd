@@ -23,7 +23,7 @@
 
 constexpr uint8_t DSD_SILENCE_BYTE = 0x69;
 
-const auto CTABLES = [](auto fir_length) {
+auto CTABLES = [](auto fir_length) {
 	return (fir_length + 7) / 8;
 };
 

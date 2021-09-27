@@ -42,14 +42,14 @@ public:
 	~PCMPCMFir() {
 		free();
 	}
-	void init(real_t* fir_coefs, int fir_length, int decimation) {
-		this->fir_coefs = fir_coefs;
-		this->fir_order = fir_length - 1;
-		this->fir_length = fir_length;
-		this->decimation = decimation;
-		int buf_size = 2 * this->fir_length * sizeof(real_t);
-		this->fir_buffer = (real_t*)DSDPCMUtil::mem_alloc(buf_size);
-		memset(this->fir_buffer, 0, buf_size);
+	void init(real_t* p_fir_coefs, int p_fir_length, int p_decimation) {
+		fir_coefs = p_fir_coefs;
+		fir_order = p_fir_length - 1;
+		fir_length = p_fir_length;
+		decimation = p_decimation;
+		auto buf_size = 2 * fir_length * sizeof(real_t);
+		fir_buffer = (real_t*)DSDPCMUtil::mem_alloc(buf_size);
+		memset(fir_buffer, 0, buf_size);
 		fir_index = 0;
 	}
 	void free() {
@@ -64,16 +64,16 @@ public:
 	float get_delay() {
 		return (float)fir_order / 2 / decimation;
 	}
-	int run(real_t* m_pcm_data, real_t* out_data, int pcm_samples) {
-		int out_samples = pcm_samples / decimation;
-		for (int sample = 0; sample < out_samples; sample++) {
-			for (int i = 0; i < decimation; i++) {
-				fir_buffer[fir_index + fir_length] = fir_buffer[fir_index] = *(m_pcm_data++);
+	int run(real_t* p_pcm_data, real_t* p_out_data, int p_pcm_samples) {
+		auto out_samples = p_pcm_samples / decimation;
+		for (auto sample = 0; sample < out_samples; sample++) {
+			for (auto i = 0; i < decimation; i++) {
+				fir_buffer[fir_index + fir_length] = fir_buffer[fir_index] = *(p_pcm_data++);
 				fir_index = (++fir_index) % fir_length;
 			}
-			out_data[sample] = (real_t)0;
-			for (int j = 0; j < fir_length; j++) {
-				out_data[sample] += fir_coefs[j] * fir_buffer[fir_index + j];
+			p_out_data[sample] = (real_t)0;
+			for (auto j = 0; j < fir_length; j++) {
+				p_out_data[sample] += fir_coefs[j] * fir_buffer[fir_index + j];
 			}
 		}
 		return out_samples;

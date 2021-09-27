@@ -1,6 +1,6 @@
 /*
 * SACD Decoder plugin
-* Copyright (c) 2011-2015 Maxim V.Anisiutkin <maxim.anisiutkin@gmail.com>
+* Copyright (c) 2011-2021 Maxim V.Anisiutkin <maxim.anisiutkin@gmail.com>
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU Lesser General Public
@@ -21,8 +21,6 @@
 
 #include "DSDPCMConstants.h"
 #include "DSDPCMUtil.h"
-
-#include <math.h>
 
 template<typename real_t>
 class DSDPCMFilterSetup	{
@@ -63,7 +61,7 @@ public:
 		DSDPCMUtil::mem_free(dsd_fir1_64_ctables);
 		dsd_fir1_64_ctables = nullptr;
 	}
-	static const double NORM_I(const int scale = 0) {
+	static double NORM_I(const int scale = 0) {
 		return (double)1 / (double)((unsigned int)1 << (31 - scale));
 	}
 	ctable_t* get_fir1_8_ctables() {
@@ -128,11 +126,9 @@ public:
 		dsd_fir1_64_length = fir_length;
 	}
 	void set_gain(float dB_gain) {
-		if (dB_gain != dsd_fir1_dB_gain) {
-			flush_fir1_ctables();
-			dsd_fir1_dB_gain = dB_gain;
-			dsd_fir1_gain = pow(10.0, dsd_fir1_dB_gain / 20.0);
-		}
+		flush_fir1_ctables();
+		dsd_fir1_dB_gain = dB_gain;
+		dsd_fir1_gain = pow((real_t)10, dsd_fir1_dB_gain / (real_t)20);
 	}
 private:
 	int set_ctables(const double* fir_coefs, const int fir_length, const double fir_gain, ctable_t* out_ctables) {
@@ -161,4 +157,3 @@ private:
 		}
 	}
 };
-

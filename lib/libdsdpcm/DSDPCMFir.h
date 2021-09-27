@@ -43,14 +43,14 @@ public:
 	~DSDPCMFir() {
 		free();
 	}
-	void init(ctable_t* fir_ctables, int fir_length, int decimation) {
-		this->fir_ctables = fir_ctables;
-		this->fir_order = fir_length - 1;
-		this->fir_length = CTABLES(fir_length);
-		this->decimation = decimation / 8;
-		int buf_size = 2 * this->fir_length * sizeof(uint8_t);
-		this->fir_buffer = (uint8_t*)DSDPCMUtil::mem_alloc(buf_size);
-		memset(this->fir_buffer, DSD_SILENCE_BYTE, buf_size);
+	void init(ctable_t* p_fir_ctables, int p_fir_length, int p_decimation) {
+		fir_ctables = p_fir_ctables;
+		fir_order = p_fir_length - 1;
+		fir_length = CTABLES(p_fir_length);
+		decimation = p_decimation / 8;
+		auto buf_size = 2 * fir_length * sizeof(uint8_t);
+		fir_buffer = (uint8_t*)DSDPCMUtil::mem_alloc(buf_size);
+		memset(fir_buffer, DSD_SILENCE_BYTE, buf_size);
 		fir_index = 0;
 	}
 	void free() {
@@ -65,16 +65,16 @@ public:
 	float get_delay() {
 		return (float)fir_order / 2 / 8 / decimation;
 	}
-	int run(uint8_t* dsd_data, real_t* m_pcm_data, int dsd_samples) {
-		int pcm_samples = dsd_samples / decimation;
-		for (int sample = 0; sample < pcm_samples; sample++) {
-			for (int i = 0; i < decimation; i++) {
-				fir_buffer[fir_index + fir_length] = fir_buffer[fir_index] = *(dsd_data++);
+	int run(uint8_t* p_dsd_data, real_t* p_pcm_data, int p_dsd_samples) {
+		auto pcm_samples = p_dsd_samples / decimation;
+		for (auto sample = 0; sample < pcm_samples; sample++) {
+			for (auto i = 0; i < decimation; i++) {
+				fir_buffer[fir_index + fir_length] = fir_buffer[fir_index] = *(p_dsd_data++);
 				fir_index = (++fir_index) % fir_length;
 			}
-			m_pcm_data[sample] = (real_t)0;
-			for (int j = 0; j < fir_length; j++) {
-				m_pcm_data[sample] += fir_ctables[j][fir_buffer[fir_index + j]];
+			p_pcm_data[sample] = (real_t)0;
+			for (auto j = 0; j < fir_length; j++) {
+				p_pcm_data[sample] += fir_ctables[j][fir_buffer[fir_index + j]];
 			}
 		}
 		return pcm_samples;

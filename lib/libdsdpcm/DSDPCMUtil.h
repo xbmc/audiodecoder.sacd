@@ -28,14 +28,7 @@ class DSDPCMUtil {
 	static constexpr int MEM_ALIGN = 64;
 public:
 	static void* mem_alloc(size_t size) {
-#ifdef _WIN32
 		auto memory = _aligned_malloc(size, MEM_ALIGN);
-#elif defined(__linux__) && !defined(__ANDROID__)
-		auto memory = aligned_alloc(MEM_ALIGN, size);
-#else
-		void* memory;
-		posix_memalign(&memory, MEM_ALIGN, size);
-#endif
 		if (memory) {
 			memset(memory, 0, size);
 		}
@@ -43,11 +36,7 @@ public:
 	}
 	static void mem_free(void* memory) {
 		if (memory) {
-#ifdef _WIN32
 			_aligned_free(memory);
-#else
-			free(memory);
-#endif
 		}
 	}
 };
