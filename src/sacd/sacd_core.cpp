@@ -49,7 +49,7 @@ bool sacd_core_t::g_is_our_content_type(const std::string& p_type)
 bool sacd_core_t::g_is_our_path(const std::string& path, const std::string& ext)
 {
   std::string filename_ext = kodi::vfs::GetFileName(path);
-  return ((icasecmp(ext, "ISO") || icasecmp(ext, "DAT")) && sacd_disc_t::g_is_sacd(path.c_str())) ||
+  return ((icasecmp(ext, "ISO") || icasecmp(ext, "SACD") || icasecmp(ext, "DAT")) && sacd_disc_t::g_is_sacd(path.c_str())) ||
          icasecmp(ext, "DFF") || icasecmp(ext, "DSF"); /* ||
          (icasecmp(filename_ext, "") || icasecmp(filename_ext, "MASTER1.TOC")) &&
              path.length() > 7 && sacd_disc_t::g_is_sacd(path[7]);*/
@@ -71,6 +71,10 @@ bool sacd_core_t::open(const std::string& path)
     media_type = media_type_e::ISO;
   }
   else if (icasecmp(ext, "DAT"))
+  {
+    media_type = media_type_e::ISO;
+  }
+  else if (icasecmp(ext, "SACD"))
   {
     media_type = media_type_e::ISO;
   }

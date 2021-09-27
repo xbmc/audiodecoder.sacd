@@ -8,7 +8,7 @@
   <extension
     point="kodi.audiodecoder"
     name="sacd"
-    extension=".iso|.sacdstream"
+    extension=".iso|.sacd|.sacdstream"
     tracks="true"
     tags="true"
     library_@PLATFORM@="@LIBRARY_FILENAME@"/>
