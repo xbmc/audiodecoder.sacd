@@ -83,7 +83,7 @@ bool CSACDAudioDecoder::Init(const std::string& filename,
 
   double* fir_data = nullptr;
   int fir_size = 0;
-  if (CSACDSettings::GetInstance().GetConverterType() == conv_type_e::DSDPCM_CONV_USER)
+  if (CSACDSettings::GetInstance().GetConverterType() == conv_type_e::USER)
   {
     std::string path = CSACDSettings::GetInstance().GetConverterFirFile();
     if (!path.empty() && LoadFir(kodi::GetAddonPath(path)))
@@ -106,7 +106,7 @@ bool CSACDAudioDecoder::Init(const std::string& filename,
       kodi::Log(ADDON_LOG_ERROR, "No installed FIR, continue with the default", "DSD2PCM");
     }
     int rv = m_dsdPCMDecoder->init(m_pcmOutChannels, m_framerate, m_dsdSamplerate,
-                                   m_pcmOutSamplerate, conv_type_e::DSDPCM_CONV_DIRECT,
+                                   m_pcmOutSamplerate, conv_type_e::DIRECT,
                                    CSACDSettings::GetInstance().GetConverterFp64(), nullptr, 0);
     if (rv < 0)
     {

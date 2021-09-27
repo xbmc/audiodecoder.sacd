@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 project(audiodecoder.sacd)
 
-set(CMAKE_CXX_STANDARD 17)
-
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR})
 
 find_package(Kodi REQUIRED)
@@ -21,6 +19,8 @@ include_directories(${PROJECT_SOURCE_DIR}/lib/id3v2lib/include
 add_subdirectory(lib/libdsdpcm)
 add_subdirectory(lib/libdstdec)
 add_subdirectory(lib/id3v2lib)
+
+set(CMAKE_CXX_STANDARD 17)
 
 set(SACD_SOURCES src/Addon.cpp
                  src/SACDAudio.cpp

@@ -60,20 +60,20 @@ bool CSACDSettings::SetSetting(const std::string& settingName,
 
 conv_type_e CSACDSettings::GetConverterType() const
 {
-  auto conv_type = conv_type_e::DSDPCM_CONV_MULTISTAGE;
+  auto conv_type = conv_type_e::MULTISTAGE;
   switch (m_dsd2pcmMode)
   {
     case 0:
     case 1:
-      conv_type = conv_type_e::DSDPCM_CONV_MULTISTAGE;
+      conv_type = conv_type_e::MULTISTAGE;
       break;
     case 2:
     case 3:
-      conv_type = conv_type_e::DSDPCM_CONV_DIRECT;
+      conv_type = conv_type_e::DIRECT;
       break;
     case 4:
     case 5:
-      conv_type = conv_type_e::DSDPCM_CONV_USER;
+      conv_type = conv_type_e::USER;
       break;
   }
   return conv_type;
