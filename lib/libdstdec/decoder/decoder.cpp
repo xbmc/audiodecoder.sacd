@@ -9,27 +9,27 @@
 namespace dst
 {
 
-static int int_abs(int n) {
+static unsigned int int_abs(int n) {
 	int mask = n >> (8 * sizeof(int) - 1);
-	return (n + mask) ^ mask;
+	return (unsigned int)((n + mask) ^ mask);
 }
 
-static int int_log2(int n) {
+static unsigned int int_log2(unsigned int n) {
 	return (n > 1) ? 1 + int_log2(n >> 1) : 0;
 }
 
-int  decoder_t::GC_ICoefSign[256];
-int  decoder_t::GC_ICoefIndex[256];
-bool decoder_t::GC_ICoefInit = false;
+int          decoder_t::GC_ICoefSign[256];
+unsigned int decoder_t::GC_ICoefIndex[256];
+bool         decoder_t::GC_ICoefInit = false;
 
 decoder_t::decoder_t() {
 	if (!GC_ICoefInit) {
 		GC_ICoefSign[0] = 0;
-		GC_ICoefIndex[0] = -1;
+		GC_ICoefIndex[0] = (unsigned int)-1;
 		for (int i = 1; i < 256; i++) {
-			int i_gray_delta = (i ^ (i >> 1)) - ((i - 1) ^ ((i - 1) >> 1));
-			int i_gray_delta_abs = int_abs(i_gray_delta);
-			int i_gray_index = int_log2(i_gray_delta_abs);
+			auto i_gray_delta = (i ^ (i >> 1)) - ((i - 1) ^ ((i - 1) >> 1));
+			auto i_gray_delta_abs = int_abs(i_gray_delta);
+			auto i_gray_index = int_log2(i_gray_delta_abs);
 			if (i_gray_delta > 0) {
 				GC_ICoefSign[i] = +1;
 			}
@@ -45,7 +45,7 @@ decoder_t::decoder_t() {
 decoder_t::~decoder_t() {
 }
 
-int decoder_t::init(int channels, int channel_frame_size) {
+int decoder_t::init(unsigned int channels, unsigned int channel_frame_size) {
 	m_fr.init(channels, channel_frame_size);
 	m_ft.init(2 * channels);
 	m_pt.init(2 * channels);
@@ -61,13 +61,12 @@ int decoder_t::close() {
 }
 
 // Decode a complete frame (all channels)
-int decoder_t::decode(const uint8_t* dst_data, int dst_bits, uint8_t* dsd_data) {
-	int      rv = 0;
-	int      ChNr;
-	int      BitNr;
-	uint8_t  ACError;
-	int      NrOfBitsPerCh = m_fr.NrOfBitsPerCh;
-	int      NrOfChannels = m_fr.NrOfChannels;
+int decoder_t::decode(const uint8_t* dst_data, unsigned int dst_bits, uint8_t* dsd_data) {
+	int     rv = 0;
+	uint8_t ACError;
+
+	auto NrOfBitsPerCh = m_fr.NrOfBitsPerCh;
+	auto NrOfChannels = m_fr.NrOfChannels;
 
 	m_fr.CalcNrOfBytes = dst_bits / 8;
 	m_fr.CalcNrOfBits = m_fr.CalcNrOfBytes * 8;
@@ -91,12 +90,12 @@ int decoder_t::decode(const uint8_t* dst_data, int dst_bits, uint8_t* dsd_data) 
 		AC.decodeBit_Decode(&ACError, reverse7LSBs(m_fr.ICoefA[0][0]), AData.data(), ADataLen);
 
 		memset(dsd_data, 0, (NrOfBitsPerCh * NrOfChannels + 7) / 8);
-		for (BitNr = 0; BitNr < NrOfBitsPerCh; BitNr++) {
-			for (ChNr = 0; ChNr < NrOfChannels; ChNr++) {
+		for (auto BitNr = 0u; BitNr < NrOfBitsPerCh; BitNr++) {
+			for (auto ChNr = 0u; ChNr < NrOfChannels; ChNr++) {
 				int16_t Predict;
 				uint8_t Residual;
 				int16_t BitVal;
-				const int FilterNr = GET_NIBBLE(m_fr.Filter4Bit[ChNr].data(), BitNr);
+				auto FilterNr = GET_NIBBLE(m_fr.Filter4Bit[ChNr].data(), BitNr);
 
 				/* Calculate output value of the FIR filter */
 				Predict = LT_RunFilter(LT_ICoefI[FilterNr], LT_Status[ChNr]);
@@ -106,13 +105,13 @@ int decoder_t::decode(const uint8_t* dst_data, int dst_bits, uint8_t* dsd_data) 
 					AC.decodeBit_Decode(&Residual, AC_PROBS / 2, AData.data(), ADataLen);
 				}
 				else {
-					int PtableNr = GET_NIBBLE(m_fr.Ptable4Bit[ChNr].data(), BitNr);
-					int PtableIndex = AC.getPtableIndex(Predict, m_fr.PtableLen[PtableNr]);
+					auto PtableNr = GET_NIBBLE(m_fr.Ptable4Bit[ChNr].data(), BitNr);
+					auto PtableIndex = AC.getPtableIndex(Predict, m_fr.PtableLen[PtableNr]);
 					AC.decodeBit_Decode(&Residual, P_one[PtableNr][PtableIndex], AData.data(), ADataLen);
 				}
 
 				/* Channel bit depends on the predicted bit and BitResidual[][] */
-				BitVal = ((((uint16_t)Predict) >> 15) ^ Residual) & 1;
+				BitVal = (int16_t)(((((uint16_t)Predict) >> 15) ^ Residual) & 1);
 
 				/* Shift the result into the correct bit position */
 				dsd_data[(BitNr >> 3) * NrOfChannels + ChNr] |= (uint8_t)(BitVal << (7 - (BitNr & 7)));
@@ -130,7 +129,7 @@ int decoder_t::decode(const uint8_t* dst_data, int dst_bits, uint8_t* dsd_data) 
 		AC.decodeBit_Flush(&ACError, 0, AData.data(), ADataLen);
 
 		if (ACError != 1) {
-			kodiLog(ADDON_LOG_ERROR, "ERROR: Arithmetic decoding error");
+			log_printf("ERROR: Arithmetic decoding error");
 			rv = -1;
 		}
 	}
@@ -147,7 +146,7 @@ int decoder_t::unpack(const uint8_t* dst_data, uint8_t* dsd_data) {
 		unused = m_fr.get_uint(1); // Read DST_X_Bit (Table 10.4)
 		unused = m_fr.get_uint(6); // Read Reserved (Table 10.4)
 		if (unused) {
-			kodiLog(ADDON_LOG_ERROR, "ERROR: Illegal stuffing pattern in frame");
+			log_printf("ERROR: Illegal stuffing pattern in frame");
 			return -1;
 		}
 		m_fr.read_dsd_data(dsd_data); // Read DSD data and put in output stream
@@ -160,7 +159,7 @@ int decoder_t::unpack(const uint8_t* dst_data, uint8_t* dsd_data) {
 		ADataLen = m_fr.CalcNrOfBits - m_fr.get_offset();
 		m_fr.read_arithmetic_coded_data(AData.data()); // Read Arithmetic_Coded_Data (Table 10.4)
 		if (ADataLen > 0 && GET_BIT(AData.data(), 0) != 0) {
-			kodiLog(ADDON_LOG_ERROR, "ERROR: Illegal arithmetic code in frame");
+			log_printf("ERROR: Illegal arithmetic code in frame");
 			return -1;
 		}
 	}
@@ -186,46 +185,45 @@ int16_t decoder_t::reverse7LSBs(int16_t c) {
 /* Fill an array that indicates for each bit of each channel which table number must be used */
 
 void decoder_t::fillTable4Bit(segment_t& S, vector<vector<uint8_t>>& Table4Bit) {
-	int SegNr;
-	int Start;
-	int End;
+	unsigned int SegNr;
+	unsigned int Start;
+	unsigned int End;
 	int8_t Val;
-	for (int ChNr = 0; ChNr < m_fr.NrOfChannels; ChNr++) {
-		for (SegNr = 0, Start = 0; SegNr < S.NrOfSegments[ChNr] - 1; SegNr++) {
+	for (auto ChNr = 0u; ChNr < m_fr.NrOfChannels; ChNr++) {
+		for (SegNr = 0u, Start = 0; SegNr < S.NrOfSegments[ChNr] - 1; SegNr++) {
 			Val = (int8_t)S.Table4Segment[ChNr][SegNr];
 			End = Start + S.Resolution * 8 * S.SegmentLength[ChNr][SegNr];
-			for (int BitNr = Start; BitNr < End; BitNr++) {
+			for (auto BitNr = Start; BitNr < End; BitNr++) {
 				uint8_t* p = (uint8_t*)&Table4Bit[ChNr][BitNr / 2];
-				int s = (BitNr & 1) << 2;
-				*p = ((uint8_t)Val << s) | (*p & (0xf0 >> s));
+				auto s = (BitNr & 1) << 2;
+				*p = (uint8_t)(((uint8_t)Val << s) | (*p & (0xf0 >> s)));
 			}
 			Start += S.Resolution * 8 * S.SegmentLength[ChNr][SegNr];
 		}
 		Val = (int8_t)S.Table4Segment[ChNr][SegNr];
-		for (int BitNr = Start; BitNr < m_fr.NrOfBitsPerCh; BitNr++) {
+		for (auto BitNr = Start; BitNr < m_fr.NrOfBitsPerCh; BitNr++) {
 			uint8_t* p = (uint8_t*)&Table4Bit[ChNr][BitNr / 2];
-			int s = (BitNr & 1) << 2;
-			*p = ((uint8_t)Val << s) | (*p & (0xf0 >> s));
+			auto s = (BitNr & 1) << 2;
+			*p = (uint8_t)(((uint8_t)Val << s) | (*p & (0xf0 >> s)));
 		}
 	}
 }
 
 void decoder_t::LT_InitCoefTables(vector<array<array<int16_t, 256>, 16>>& ICoefI) {
-	int FilterNr, FilterLength, TableNr, k, i, j;
-	for (FilterNr = 0; FilterNr < m_fr.NrOfFilters; FilterNr++) {
-		FilterLength = m_fr.PredOrder[FilterNr];
-		for (TableNr = 0; TableNr < 16; TableNr++) {
-			k = FilterLength - TableNr * 8;
+	for (auto FilterNr = 0u; FilterNr < m_fr.NrOfFilters; FilterNr++) {
+		auto FilterLength = m_fr.PredOrder[FilterNr];
+		for (auto TableNr = 0u; TableNr < 16u; TableNr++) {
+			auto k = (int)FilterLength - (int)TableNr * 8;
 			if (k > 8) {
 				k = 8;
 			}
 			else if (k < 0) {
 				k = 0;
 			}
-			for (i = 0; i < 256; i++) {
+			for (auto i = 0; i < 256; i++) {
 				int cvalue = 0;
-				for (j = 0; j < k; j++) {
-					cvalue += (((i >> j) & 1) * 2 - 1)* m_fr.ICoefA[FilterNr][TableNr * 8 + j];
+				for (auto j = 0; j < k; j++) {
+					cvalue += (((i >> j) & 1) * 2 - 1) * m_fr.ICoefA[FilterNr][TableNr * 8 + j];
 				}
 				ICoefI[FilterNr][TableNr][i] = (int16_t)cvalue;
 			}
@@ -234,11 +232,10 @@ void decoder_t::LT_InitCoefTables(vector<array<array<int16_t, 256>, 16>>& ICoefI
 }
 
 void decoder_t::GC_InitCoefTables(vector<array<array<int16_t, 256>, 16>>& ICoefI) {
-	int FilterNr, FilterLength, k;
-	for (FilterNr = 0; FilterNr < m_fr.NrOfFilters; FilterNr++) {
-		FilterLength = m_fr.PredOrder[FilterNr];
-		for (int TableNr = 0; TableNr < 16; TableNr++) {
-			k = FilterLength - TableNr * 8;
+	for (auto FilterNr = 0u; FilterNr < m_fr.NrOfFilters; FilterNr++) {
+		auto FilterLength = m_fr.PredOrder[FilterNr];
+		for (auto TableNr = 0u; TableNr < 16u; TableNr++) {
+			auto k = (int)FilterLength - (int)TableNr * 8;
 			if (k > 8) {
 				k = 8;
 			}
@@ -246,14 +243,14 @@ void decoder_t::GC_InitCoefTables(vector<array<array<int16_t, 256>, 16>>& ICoefI
 				k = 0;
 			}
 			int cvalue = 0;
-			for (int j = 0; j < k; j++) {
+			for (auto j = 0; j < k; j++) {
 				cvalue -= m_fr.ICoefA[FilterNr][TableNr * 8 + j];
 			}
 			ICoefI[FilterNr][TableNr][0] = (int16_t)cvalue;
-			for (int i = 1; i < 256; i++) {
-				int i_gray = i ^ (i >> 1);
-				int j_gray = GC_ICoefIndex[i];
-				if (j_gray < k) {
+			for (auto i = 1; i < 256; i++) {
+				auto i_gray = i ^ (i >> 1);
+				auto j_gray = GC_ICoefIndex[i];
+				if (j_gray < (unsigned int)k) {
 					cvalue += GC_ICoefSign[i] * (m_fr.ICoefA[FilterNr][TableNr * 8 + j_gray] << 1);
 				}
 				ICoefI[FilterNr][TableNr][i_gray] = (int16_t)cvalue;
@@ -263,9 +260,8 @@ void decoder_t::GC_InitCoefTables(vector<array<array<int16_t, 256>, 16>>& ICoefI
 }
 
 void decoder_t::LT_InitStatus(vector<array<uint8_t, 16>>& Status) {
-	int ChNr, TableNr;
-	for (ChNr = 0; ChNr < m_fr.NrOfChannels; ChNr++) {
-		for (TableNr = 0; TableNr < 16; TableNr++) {
+	for (auto ChNr = 0u; ChNr < m_fr.NrOfChannels; ChNr++) {
+		for (auto TableNr = 0u; TableNr < 16u; TableNr++) {
 			Status[ChNr][TableNr] = 0xaa;
 		}
 	}

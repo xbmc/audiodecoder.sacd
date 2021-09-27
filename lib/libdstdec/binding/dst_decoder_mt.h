@@ -27,6 +27,7 @@
 
 using std::thread;
 using std::vector;
+using std::ref;
 using dst::decoder_t;
 
 enum class slot_state_t {SLOT_EMPTY, SLOT_LOADED, SLOT_RUNNING, SLOT_READY, SLOT_READY_WITH_ERROR, SLOT_TERMINATING};
@@ -40,11 +41,11 @@ public:
 
 	slot_state_t state;
 	uint8_t*     dsd_data;
-	int          dsd_size;
+	unsigned int dsd_size;
 	uint8_t*     dst_data;
-	int          dst_size;
-	int          channel_count;
-	int          channel_frame_size;
+	unsigned int dst_size;
+	unsigned int channel_count;
+	unsigned int channel_frame_size;
 	decoder_t    dec;
 
 	frame_slot_t() {
@@ -58,19 +59,28 @@ public:
 		channel_frame_size = 0;
 	}
 	frame_slot_t(const frame_slot_t& slot) {
+		run_slot = slot.run_slot;
+		state = slot.state;
+		dsd_data = slot.dsd_data;
+		dsd_size = slot.dsd_size;
+		dst_data = slot.dst_data;
+		dst_size = slot.dst_size;
+		channel_count = slot.channel_count;
+		channel_frame_size = slot.channel_frame_size;
 	}
+	frame_slot_t& operator=(const frame_slot_t& slot) = delete;
 };
 
 class dst_decoder_t {
 	vector<frame_slot_t> frame_slots;
-	int slot_nr;       
-	int channel_count;
-	int channel_frame_size;
+	unsigned int slot_nr;       
+	unsigned int channel_count;
+	unsigned int channel_frame_size;
 public:
-	dst_decoder_t(int threads);
+	dst_decoder_t(unsigned int threads);
 	~dst_decoder_t();
-	int get_slot_nr();
-	int init(int channels, int samplerate, int framerate);
+	unsigned int get_slot_nr();
+	int init(unsigned int channels, unsigned int samplerate, unsigned int framerate);
 	int decode(uint8_t* dst_data, size_t dst_size, uint8_t** dsd_data, size_t* dsd_size);
 };
 

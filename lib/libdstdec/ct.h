@@ -17,23 +17,29 @@ using std::vector;
 namespace dst
 {
 
-const int MAXFTABLESIZE = MAXPREDORDER * SIZE_PREDCOEF;
-const int MAXPTABLESIZE = AC_BITS * AC_HISMAX;
+enum class ct_e { Filter, Ptable };
 
-template<int table_size>
+constexpr int MAXFILTERBITS = MAXPREDORDER * SIZE_PREDCOEF;
+constexpr int MAXPTABLEBITS = AC_HISMAX * AC_BITS;
+
+template<ct_e ct_type>
 class ct_t {
+protected:
+	static constexpr int ct_size = (ct_type == ct_e::Filter) ? MAXPREDORDER : AC_HISMAX;
+	static constexpr int ct_bits = (ct_type == ct_e::Filter) ? MAXFILTERBITS : MAXPTABLEBITS;
 public:
-	int StreamBits;                                 // Number of bits all filters use in the stream
-	int CPredOrder[NROFFRICEMETHODS];               // Code_PredOrder[Method]
-	int CPredCoef[NROFPRICEMETHODS][MAXCPREDORDER]; // Code_PredCoef[Method][CoefNr]
-	vector<bool> Coded;                             // DST encode coefs/entries of Fir/PtabNr
-	vector<int> BestMethod;                         // BestMethod[Fir/PtabNr]
-	vector<array<int, NROFFRICEMETHODS>> m;         // m[Fir/PtabNr][Method]
-	vector<int> DataLenData;                        // Fir/PtabDataLength[Fir/PtabNr]
-	vector<array<int, table_size>> data;            // Fir/PtabData[FirNr][Index]
+	unsigned int NrOfTables;                         // Number of coded tables
+	unsigned int StreamBits;                         // Number of bits all filters use in the stream
+	unsigned int CPredOrder[NROFFRICEMETHODS];       // Code_PredOrder[Method]
+	int CPredCoef[NROFPRICEMETHODS][MAXCPREDORDER];  // Code_PredCoef[Method][CoefNr]
+	vector<bool> Coded;                              // DST encode coefs/entries of Fir/PtabNr
+	vector<unsigned int> BestMethod;                 // BestMethod[Fir/PtabNr]
+	vector<array<unsigned int, NROFFRICEMETHODS>> m; // m[Fir/PtabNr][Method]
+	vector<unsigned int> DataLenData;                // Fir/PtabDataLength[Fir/PtabNr]
+	vector<array<int, ct_size>> data;                // Fir/PtabData[FirNr][Index]
 public:
 	ct_t() {
-		if (table_size == MAXFTABLESIZE) {
+		if constexpr(ct_type == ct_e::Filter) {
 			CPredOrder[0] = 1;
 			CPredCoef[0][0] = -8;
 			CPredOrder[1] = 2;
@@ -43,12 +49,12 @@ public:
 			CPredCoef[2][0] = -9;
 			CPredCoef[2][1] = -5;
 			CPredCoef[2][2] = 6;
-#if NROFFRICEMETHODS == 4
-			CPredOrder[3] = 1;
-			CPredCoef[3][0] = 8;
-#endif
+			if constexpr (NROFFRICEMETHODS == 4) {
+				CPredOrder[3] = 1;
+				CPredCoef[3][0] = 8;
+			}
 		}
-		if (table_size == MAXPTABLESIZE) {
+		if constexpr(ct_type == ct_e::Ptable) {
 			CPredOrder[0] = 1;
 			CPredCoef[0][0] = -8;
 			CPredOrder[1] = 2;
@@ -60,7 +66,8 @@ public:
 			CPredCoef[2][2] = -8;
 		}
 	}
-	void init(int tables) {
+	void init(unsigned int tables) {
+		NrOfTables = tables;
 		Coded.resize(tables);
 		BestMethod.resize(tables);
 		m.resize(tables);
@@ -69,8 +76,8 @@ public:
 	}
 };
 
-typedef ct_t<MAXFTABLESIZE> ft_t;
-typedef ct_t<MAXPTABLESIZE> pt_t;
+typedef ct_t<ct_e::Filter> ft_t;
+typedef ct_t<ct_e::Ptable> pt_t;
 
 }
 
