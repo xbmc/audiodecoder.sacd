@@ -24,10 +24,19 @@
 #include <math.h>
 #include <stdio.h>
 
+#ifdef BUILD_KODI_ADDON
+#include <kodi/General.h>
+
+#define LOG_ERROR   ADDON_LOG_ERROR
+#define LOG_WARNING ADDON_LOG_WARNING
+#define LOG_INFO    ADDON_LOG_INFO
+#define LOG(p1, p2) kodi::Log(p1, "%s", p2)
+#else
 #define LOG_ERROR   ("Error: ")
 #define LOG_WARNING ("Warning: ")
 #define LOG_INFO    ("Info: ")
-#define LOG(p1, p2) log_printf("%s%s", p1, p2)
+#define LOG(p1, p2) fprintf(stderr, "%s%s", p1, p2)
+#endif
 
 using std::min;
 using std::max;
