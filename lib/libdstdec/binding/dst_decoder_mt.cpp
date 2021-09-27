@@ -17,19 +17,13 @@
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 */
 
-#include <malloc.h>
 #include <memory.h>
 #include <stdio.h>
 #include <stdarg.h>
+#include <stdlib.h>
 #include "dst_decoder_mt.h"
 
 #define DSD_SILENCE_BYTE 0x69
-
-#define LOG_ERROR   ("Error: ")
-#define LOG_WARNING ("Warning: ")
-#define LOG_INFO    ("Info: ")
-
-#define LOG(p1, p2) log_printf("%s%s", p1, p2)
 
 static void dst_run_thread(frame_slot_t& slot) {
 	while (slot.run_slot) {
@@ -79,12 +73,12 @@ int dst_decoder_t::init(unsigned int channels, unsigned int samplerate, unsigned
 			slot.run_slot = true;
 			slot.run_thread = thread(dst_run_thread, ref(slot));
 			if (!slot.run_thread.joinable()) {
-				LOG(LOG_ERROR, ("Could not start decoder thread"));
+				kodiLog(ADDON_LOG_ERROR, ("Could not start decoder thread"));
 				return -1;
 			}
 		}
 		else {
-			LOG(LOG_ERROR, ("Could not initialize decoder slot"));
+			kodiLog(ADDON_LOG_ERROR, ("Could not initialize decoder slot"));
 			return -1;
 		}
 	}

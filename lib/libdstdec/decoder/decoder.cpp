@@ -129,7 +129,7 @@ int decoder_t::decode(const uint8_t* dst_data, unsigned int dst_bits, uint8_t* d
 		AC.decodeBit_Flush(&ACError, 0, AData.data(), ADataLen);
 
 		if (ACError != 1) {
-			log_printf("ERROR: Arithmetic decoding error");
+			kodiLog(ADDON_LOG_ERROR, "Arithmetic decoding error");
 			rv = -1;
 		}
 	}
@@ -146,7 +146,7 @@ int decoder_t::unpack(const uint8_t* dst_data, uint8_t* dsd_data) {
 		unused = m_fr.get_uint(1); // Read DST_X_Bit (Table 10.4)
 		unused = m_fr.get_uint(6); // Read Reserved (Table 10.4)
 		if (unused) {
-			log_printf("ERROR: Illegal stuffing pattern in frame");
+			kodiLog(ADDON_LOG_ERROR, "Illegal stuffing pattern in frame");
 			return -1;
 		}
 		m_fr.read_dsd_data(dsd_data); // Read DSD data and put in output stream
@@ -159,7 +159,7 @@ int decoder_t::unpack(const uint8_t* dst_data, uint8_t* dsd_data) {
 		ADataLen = m_fr.CalcNrOfBits - m_fr.get_offset();
 		m_fr.read_arithmetic_coded_data(AData.data()); // Read Arithmetic_Coded_Data (Table 10.4)
 		if (ADataLen > 0 && GET_BIT(AData.data(), 0) != 0) {
-			log_printf("ERROR: Illegal arithmetic code in frame");
+			kodiLog(ADDON_LOG_ERROR, "Illegal arithmetic code in frame");
 			return -1;
 		}
 	}

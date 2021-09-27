@@ -39,7 +39,7 @@ public:
 
 	bool get_bit() {
 		if (m_offset + 1 > 8 * m_size) {
-			log_printf("ERROR: read after end of stream");
+			kodiLog(ADDON_LOG_ERROR, "read after end of stream");
 			return false;
 		}
 		uint32_t value = m_data[m_offset / 8];
@@ -59,7 +59,7 @@ public:
 
 	uint32_t get_uint(unsigned int length) {
 		if (m_offset + length > 8 * m_size) {
-			log_printf("ERROR: read after end of stream");
+			kodiLog(ADDON_LOG_ERROR, "read after end of stream");
 			return 0;
 		}
 		uint32_t value = 0;

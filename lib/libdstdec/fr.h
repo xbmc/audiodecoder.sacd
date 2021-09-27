@@ -75,14 +75,14 @@ public:
 			EndOfChannelSegment = get_bit(); // Read End_Of_Channel_Segm (Table 10.7)
 			while (!EndOfChannelSegment) {
 				if (SegmentNr >= MaxNrOfSegments) {
-					log_printf("ERROR: Too many segments for this channel");
+					kodiLog(ADDON_LOG_ERROR, "Too many segments for this channel");
 					return;
 				}
 				if (!ResolutionRead) {
 					NrOfBits = log2_round_up(MaxFrameLen - MinSegmentLength / 8);
 					Segment.Resolution = get_uint(NrOfBits); // Read Resolution (Table 10.7)
 					if ((Segment.Resolution == 0) || (Segment.Resolution > MaxFrameLen - MinSegmentLength / 8)) {
-						log_printf("ERROR: Invalid segment resolution");
+						kodiLog(ADDON_LOG_ERROR, "Invalid segment resolution");
 						return;
 					}
 					ResolutionRead = true;
@@ -90,7 +90,7 @@ public:
 				NrOfBits = log2_round_up(MaxSegmentSize / Segment.Resolution);
 				Segment.SegmentLength[0][SegmentNr] = get_uint(NrOfBits); // Read Scaled_Length (Table 10.7)
 				if ((Segment.Resolution * 8 * Segment.SegmentLength[0][SegmentNr] < MinSegmentLength) || (Segment.Resolution * 8 * Segment.SegmentLength[0][SegmentNr] > MaxFrameLen * 8 - DefinedBits - MinSegmentLength)) {
-					log_printf("ERROR: Invalid segment length");
+					kodiLog(ADDON_LOG_ERROR, "Invalid segment length");
 					return;
 				}
 				DefinedBits += Segment.Resolution * 8 * Segment.SegmentLength[0][SegmentNr];
@@ -110,7 +110,7 @@ public:
 		else {
 			while (ChNr < NrOfChannels) {
 				if (SegmentNr >= MaxNrOfSegments) {
-					log_printf("ERROR: Too many segments for this channel");
+					kodiLog(ADDON_LOG_ERROR, "Too many segments for this channel");
 					return;
 				}
 				EndOfChannelSegment = get_bit(); // Read End_Of_Channel_Segm (Table 10.7)
@@ -119,7 +119,7 @@ public:
 						NrOfBits = log2_round_up(MaxFrameLen - MinSegmentLength / 8);
 						Segment.Resolution = get_uint(NrOfBits); // Read Resolution (Table 10.7)
 						if ((Segment.Resolution == 0) || (Segment.Resolution > MaxFrameLen - MinSegmentLength / 8)) {
-							log_printf("ERROR: Invalid segment resolution");
+							kodiLog(ADDON_LOG_ERROR, "Invalid segment resolution");
 							return;
 						}
 						ResolutionRead = true;
@@ -127,7 +127,7 @@ public:
 					NrOfBits = log2_round_up(MaxSegmentSize / Segment.Resolution);
 					Segment.SegmentLength[ChNr][SegmentNr] = get_uint(NrOfBits); // Read Scaled_Length (Table 10.7)
 					if ((Segment.Resolution * 8 * Segment.SegmentLength[ChNr][SegmentNr] < MinSegmentLength) || (Segment.Resolution * 8 * Segment.SegmentLength[ChNr][SegmentNr] > MaxFrameLen * 8 - DefinedBits - MinSegmentLength)) {
-						log_printf("ERROR: Invalid segment length");
+						kodiLog(ADDON_LOG_ERROR, "Invalid segment length");
 						return;
 					}
 					DefinedBits += Segment.Resolution * 8 * Segment.SegmentLength[ChNr][SegmentNr];
@@ -156,7 +156,7 @@ public:
 		for (auto ChNr = 0u; ChNr < NrOfChannels; ChNr++) {
 			PSegment.NrOfSegments[ChNr] = FSegment.NrOfSegments[ChNr];
 			if (PSegment.NrOfSegments[ChNr] > MAXNROF_PSEGS) {
-				log_printf("ERROR: Too many segments");
+				kodiLog(ADDON_LOG_ERROR, "Too many segments");
 				return;
 			}
 			if (PSegment.NrOfSegments[ChNr] != PSegment.NrOfSegments[0]) {
@@ -165,7 +165,7 @@ public:
 			for (auto SegmentNr = 0u; SegmentNr < FSegment.NrOfSegments[ChNr]; SegmentNr++) {
 				PSegment.SegmentLength[ChNr][SegmentNr] = FSegment.SegmentLength[ChNr][SegmentNr];
 				if ((PSegment.SegmentLength[ChNr][SegmentNr] != 0) && (PSegment.Resolution * 8 * PSegment.SegmentLength[ChNr][SegmentNr] < MIN_PSEG_LEN)) {
-					log_printf("ERROR: Invalid segment length");
+					kodiLog(ADDON_LOG_ERROR, "Invalid segment length");
 					return;
 				}
 				if (PSegment.SegmentLength[ChNr][SegmentNr] != PSegment.SegmentLength[0][SegmentNr]) {
@@ -201,13 +201,13 @@ public:
 					CountTables++;
 				}
 				else if (S.Table4Segment[0][SegmentNr] > CountTables) {
-					log_printf("ERROR: Invalid table number for segment");
+					kodiLog(ADDON_LOG_ERROR, "Invalid table number for segment");
 					return;
 				}
 			}
 			for (auto ChNr = 1u; ChNr < NrOfChannels; ChNr++) {
 				if (S.NrOfSegments[ChNr] != S.NrOfSegments[0]) {
-					log_printf("ERROR: Mapping can not be the same for all channels");
+					kodiLog(ADDON_LOG_ERROR, "Mapping can not be the same for all channels");
 					return;
 				}
 				for (auto SegmentNr = 0u; SegmentNr < S.NrOfSegments[0]; SegmentNr++) {
@@ -225,7 +225,7 @@ public:
 							CountTables++;
 						}
 						else if (S.Table4Segment[ChNr][SegmentNr] > CountTables) {
-							log_printf("ERROR: Invalid table number for segment");
+							kodiLog(ADDON_LOG_ERROR, "Invalid table number for segment");
 							return;
 						}
 					}
@@ -233,7 +233,7 @@ public:
 			}
 		}
 		if (CountTables > MaxNrOfTables) {
-			log_printf("ERROR: Too many tables for this frame");
+			kodiLog(ADDON_LOG_ERROR, "Too many tables for this frame");
 			return;
 		}
 		NrOfTables = CountTables;
@@ -252,13 +252,13 @@ public:
 				}
 			}
 			else {
-				log_printf("ERROR: Not the same number of segments for Filters and Ptables");
+				kodiLog(ADDON_LOG_ERROR, "Not the same number of segments for Filters and Ptables");
 				return;
 			}
 		}
 		NrOfPtables = NrOfFilters;
 		if (NrOfPtables > MaxNrOfPtables) {
-			log_printf("ERROR: Too many tables for this frame");
+			kodiLog(ADDON_LOG_ERROR, "Too many tables for this frame");
 			return;
 		}
 	}
@@ -299,7 +299,7 @@ public:
 				CF.BestMethod[FilterNr] = get_uint(SIZE_RICEMETHOD); // Read CC_Method (Table 10.13)
 				auto bestmethod = CF.BestMethod[FilterNr];
 				if (CF.CPredOrder[bestmethod] >= PredOrder[FilterNr]) {
-					log_printf("ERROR: Invalid coefficient coding method");
+					kodiLog(ADDON_LOG_ERROR, "Invalid coefficient coding method");
 					return;
 				}
 				for (auto CoefNr = 0u; CoefNr < CF.CPredOrder[bestmethod]; CoefNr++) {
@@ -319,7 +319,7 @@ public:
 						c = rice_decode(CF.m[FilterNr][bestmethod]) + (-x + 3) / 8;
 					}
 					if ((c < -(1 << (SIZE_PREDCOEF - 1))) || (c >= (1 << (SIZE_PREDCOEF - 1)))) {
-						log_printf("ERROR: filter coefficient out of range");
+						kodiLog(ADDON_LOG_ERROR, "filter coefficient out of range");
 						return;
 					}
 					else {
@@ -354,7 +354,7 @@ public:
 					CP.BestMethod[PtableNr] = get_uint(SIZE_RICEMETHOD); // Read PC_Method (Table 10.14)
 					auto bestmethod = CP.BestMethod[PtableNr];
 					if (CP.CPredOrder[bestmethod] >= PtableLen[PtableNr]) {
-						log_printf("ERROR: Invalid Ptable coding method");
+						kodiLog(ADDON_LOG_ERROR, "Invalid Ptable coding method");
 						return;
 					}
 					for (auto EntryNr = 0u; EntryNr < CP.CPredOrder[bestmethod]; EntryNr++) {
@@ -375,7 +375,7 @@ public:
 							c = rice_decode(CP.m[PtableNr][bestmethod]) + (-x + 3) / 8;
 						}
 						if ((c < 1) || (c > (1 << (AC_BITS - 1)))) {
-							log_printf("ERROR: Ptable entry out of range");
+							kodiLog(ADDON_LOG_ERROR, "Ptable entry out of range");
 							return;
 						}
 						else {
