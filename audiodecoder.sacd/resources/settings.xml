@@ -103,6 +103,19 @@
           <control type="toggle" />
         </setting>
 
+        <setting id="area-allow-fallback" type="boolean" label="30052" help="30053">
+          <level>2</level>
+          <default>true</default>
+          <dependencies>
+            <dependency type="enable">
+              <or>
+                <condition setting="area" operator="!is">0</condition>
+              </or>
+            </dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+
       </group>
     </category>
   </section>

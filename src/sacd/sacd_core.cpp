@@ -142,23 +142,6 @@ bool sacd_core_t::open(const std::string& path)
       kodi::Log(ADDON_LOG_ERROR, "unsupported format %i on '%s'\n", media_type, path.c_str());
       return false;
   }
-  access_mode = ACCESS_MODE_NULL;
-  switch (CSACDSettings::GetInstance().GetSpeakerArea())
-  {
-    case 0:
-      access_mode |= ACCESS_MODE_TWOCH | ACCESS_MODE_MULCH;
-      break;
-    case 1:
-      access_mode |= ACCESS_MODE_TWOCH;
-      break;
-    case 2:
-      access_mode |= ACCESS_MODE_MULCH;
-      break;
-  }
-  if (CSACDSettings::GetInstance().GetFullPlayback())
-  {
-    access_mode |= ACCESS_MODE_FULL_PLAYBACK;
-  }
 
   if (!sacd_media->open(path, false))
   {
@@ -171,6 +154,31 @@ bool sacd_core_t::open(const std::string& path)
     kodi::Log(ADDON_LOG_ERROR, "Failed to open media reader for type %i on '%s'\n", media_type,
               path.c_str());
     return false;
+  }
+
+  access_mode = ACCESS_MODE_NULL;
+  switch (CSACDSettings::GetInstance().GetSpeakerArea())
+  {
+    case AREA_TWOCH:
+      if (sacd_reader->get_track_count(AREA_TWOCH) == 0)
+        access_mode |= ACCESS_MODE_MULCH;
+      else
+        access_mode |= ACCESS_MODE_TWOCH;
+      break;
+    case AREA_MULCH:
+      if (sacd_reader->get_track_count(AREA_MULCH) == 0)
+        access_mode |= ACCESS_MODE_TWOCH;
+      else
+        access_mode |= ACCESS_MODE_MULCH;
+      break;
+    default:
+      access_mode |= ACCESS_MODE_TWOCH | ACCESS_MODE_MULCH;
+      break;
+  }
+
+  if (CSACDSettings::GetInstance().GetFullPlayback())
+  {
+    access_mode |= ACCESS_MODE_FULL_PLAYBACK;
   }
 
   sacd_reader->set_mode(access_mode);

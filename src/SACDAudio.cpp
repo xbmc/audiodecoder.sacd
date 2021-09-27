@@ -295,7 +295,7 @@ int CSACDAudioDecoder::TrackCount(const std::string& file)
 
   if (!open(file))
     return 0;
-  return GetSubsongCount(false);
+  return GetSubsongCount(CSACDSettings::GetInstance().GetAreaAllowFallback());
 }
 
 void CSACDAudioDecoder::AdjustLFE(float* pcm_data,

@@ -148,6 +148,18 @@ msgctxt "#30051"
 msgid "Sort stereo tracks first, then all multichannel tracks."
 msgstr ""
 
+#. Boolean setting to allow play fallback if Multichannel selected and only Stereo available, or the other direction
+#: resources/settings.xml
+msgctxt "#30052"
+msgid "Fall back when preferred track area is empty"
+msgstr ""
+
+#. Help text to boolean setting on id 30052.
+#: resources/settings.xml
+msgctxt "#30053"
+msgid "If preferred tracks (stereo or multichannel) are not available, a different method is used to fall back."
+msgstr ""
+
 msgctxt "#30070"
 msgid "{0:.0f} db"
 msgstr ""

@@ -33,6 +33,7 @@ public:
   int GetSpeakerArea() const { return m_speakerArea; }
   bool GetFullPlayback() const { return false; } // unused
   bool GetSeparateMultichannel() const { return m_speakerArea == 0 && m_separateMultichannel; }
+  bool GetAreaAllowFallback() const { return m_areaAllowFallback; }
 
 private:
   CSACDSettings() = default;
@@ -44,4 +45,5 @@ private:
   std::string m_dsd2pcmFirFile;
   int m_speakerArea = 0;
   bool m_separateMultichannel = false;
+  bool m_areaAllowFallback = true;
 };
