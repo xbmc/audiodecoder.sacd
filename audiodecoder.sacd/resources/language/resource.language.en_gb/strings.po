@@ -136,6 +136,19 @@ msgctxt "#30045"
 msgid "352.8 kHz"
 msgstr ""
 
+#. Boolean setting to enable sort all stereo tracks first, then all multichannel tracks.
+#: resources/settings.xml
+msgctxt "#30050"
+msgid "Separate stereo and multichannel tracks"
+msgstr ""
+
+#. Help text to boolean setting on id 30050.
+#: resources/settings.xml
+msgctxt "#30051"
+msgid "Sort stereo tracks first, then all multichannel tracks."
+msgstr ""
+
 msgctxt "#30070"
 msgid "{0:.0f} db"
 msgstr ""
+

@@ -32,6 +32,7 @@ public:
   bool GetConverterFp64() const;
   int GetSpeakerArea() const { return m_speakerArea; }
   bool GetFullPlayback() const { return false; } // unused
+  bool GetSeparateMultichannel() const { return m_speakerArea == 0 && m_separateMultichannel; }
 
 private:
   CSACDSettings() = default;
@@ -42,4 +43,5 @@ private:
   int m_dsd2pcmMode = 0;
   std::string m_dsd2pcmFirFile;
   int m_speakerArea = 0;
+  bool m_separateMultichannel = false;
 };

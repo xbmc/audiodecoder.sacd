@@ -89,6 +89,20 @@
           </constraints>
           <control type="list" format="integer" />
         </setting>
+
+        <setting id="separate-multichannel" type="boolean" label="30050" help="30051">
+          <level>0</level>
+          <default>false</default>
+          <dependencies>
+            <dependency type="enable">
+              <or>
+                <condition setting="area" operator="is">0</condition>
+              </or>
+            </dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+
       </group>
     </category>
   </section>

@@ -17,6 +17,7 @@ bool CSACDSettings::Load()
   m_dsd2pcmMode = kodi::GetSettingInt("dsd2pcm-mode", 0);
   m_dsd2pcmFirFile = kodi::GetSettingString("firconverter", "");
   m_speakerArea = kodi::GetSettingInt("area", 0);
+  m_separateMultichannel = kodi::GetSettingBoolean("separate-multichannel", 0);
 
   return true;
 }
@@ -53,6 +54,11 @@ bool CSACDSettings::SetSetting(const std::string& settingName,
   {
     if (settingValue.GetInt() != m_speakerArea)
       m_speakerArea = settingValue.GetInt();
+  }
+  else if (settingName == "separate-multichannel")
+  {
+    if (settingValue.GetBoolean() != m_separateMultichannel)
+      m_separateMultichannel = settingValue.GetBoolean();
   }
 
   return true;
