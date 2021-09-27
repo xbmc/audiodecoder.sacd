@@ -95,7 +95,7 @@ bool sacd_core_t::open(const std::string& path)
   }*/
   if (media_type == media_type_e::INVALID)
   {
-    kodi::Log(ADDON_LOG_ERROR, "unsupported format '%s'\n", path.c_str());
+    kodi::Log(ADDON_LOG_ERROR, "unsupported format '%s'", path.c_str());
     return false;
   }
   if (is_sacd_disc)
@@ -103,7 +103,7 @@ bool sacd_core_t::open(const std::string& path)
     sacd_media = std::make_unique<sacd_media_disc_t>();
     if (!sacd_media)
     {
-      kodi::Log(ADDON_LOG_ERROR, "memory overflow '%s'\n", path.c_str());
+      kodi::Log(ADDON_LOG_ERROR, "memory overflow '%s'", path.c_str());
       return false;
     }
   }
@@ -112,7 +112,7 @@ bool sacd_core_t::open(const std::string& path)
     sacd_media = std::make_unique<sacd_media_file_t>();
     if (!sacd_media)
     {
-      kodi::Log(ADDON_LOG_ERROR, "memory overflow '%s'\n", path.c_str());
+      kodi::Log(ADDON_LOG_ERROR, "memory overflow '%s'", path.c_str());
       return false;
     }
   }
@@ -122,7 +122,7 @@ bool sacd_core_t::open(const std::string& path)
       sacd_reader = std::make_unique<sacd_disc_t>();
       if (!sacd_reader)
       {
-        kodi::Log(ADDON_LOG_ERROR, "memory overflow '%s'\n", path.c_str());
+        kodi::Log(ADDON_LOG_ERROR, "memory overflow '%s'", path.c_str());
         return false;
       }
       break;
@@ -130,7 +130,7 @@ bool sacd_core_t::open(const std::string& path)
       sacd_reader = std::make_unique<sacd_dsdiff_t>();
       if (!sacd_reader)
       {
-        kodi::Log(ADDON_LOG_ERROR, "memory overflow '%s'\n", path.c_str());
+        kodi::Log(ADDON_LOG_ERROR, "memory overflow '%s'", path.c_str());
         return false;
       }
       break;
@@ -138,24 +138,24 @@ bool sacd_core_t::open(const std::string& path)
       sacd_reader = std::make_unique<sacd_dsf_t>();
       if (!sacd_reader)
       {
-        kodi::Log(ADDON_LOG_ERROR, "memory overflow '%s'\n", path.c_str());
+        kodi::Log(ADDON_LOG_ERROR, "memory overflow '%s'", path.c_str());
         return false;
       }
       break;
     default:
-      kodi::Log(ADDON_LOG_ERROR, "unsupported format %i on '%s'\n", media_type, path.c_str());
+      kodi::Log(ADDON_LOG_ERROR, "unsupported format %i on '%s'", media_type, path.c_str());
       return false;
   }
 
   if (!sacd_media->open(path, false))
   {
-    kodi::Log(ADDON_LOG_ERROR, "Failed to open media type %i on '%s'\n", media_type, path.c_str());
+    kodi::Log(ADDON_LOG_ERROR, "Failed to open media type %i on '%s'", media_type, path.c_str());
     return false;
   }
 
   if (!sacd_reader->open(sacd_media.get()))
   {
-    kodi::Log(ADDON_LOG_ERROR, "Failed to open media reader for type %i on '%s'\n", media_type,
+    kodi::Log(ADDON_LOG_ERROR, "Failed to open media reader for type %i on '%s'", media_type,
               path.c_str());
     return false;
   }
