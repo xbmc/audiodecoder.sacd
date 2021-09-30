@@ -18,6 +18,7 @@
     <source>https://github.com/xbmc/audiodecoder.sacd</source>
     <assets>
       <icon>icon.png</icon>
+      <fanart>fanart.jpg</fanart>
     </assets>
     <summary lang="da_DK">Super Audio CD ISO-billede</summary>
     <summary lang="de_DE">Super Audio CD ISO-Image</summary>
