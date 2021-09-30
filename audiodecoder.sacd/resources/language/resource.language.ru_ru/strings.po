@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Addons\n"
-"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"Report-Msgid-Bugs-To: https://github.com/xbmc/audiodecoder.sacd/issues/\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: 2021-07-26 16:29+0000\n"
 "Last-Translator: vdkbsd <valexgus@gmail.com>\n"
@@ -32,110 +32,162 @@ msgstr "Это дополнение позволяет Kodi читать сод�
 # [Description / location] For example, "#. Description of some setting" used on "#: xbmc/addons/guidialogaddoninfo.cpp"
 # When writing a description or setting, refer to a setting name in quotes. See existing entries for guidance.
 # For example, "Press \"OK\" for \"All seasons\"" instead of "Press OK for All seasons" after first word.
+#. Settings slider to change/adjust main volume about played songs, before given to Kodi.
 msgctxt "#30020"
 msgid "Volume adjust"
 msgstr "Регулировка громкости"
 
+#. Help text to slider setting on id 30020.
 msgctxt "#30021"
 msgid "To change speaker volume with setting value during playback."
 msgstr "Установка громкости динамика с заданным значением во время воспроизведения."
 
+#. Settings slider to change/adjust LFE volume about played songs, before given to Kodi.
 msgctxt "#30022"
 msgid "LFE adjust"
 msgstr "Регулировка LFE"
 
+#. Help text to slider setting on id 30022.
 msgctxt "#30023"
 msgid "To change LFE volume with setting value during playback."
 msgstr "Установка громкости LFE с заданным значением во время воспроизведения."
 
+#. Settings list selection about used samplerate where given to Kodi
 msgctxt "#30024"
 msgid "PCM Samplerate"
 msgstr "Частота дискретизации PCM"
 
+#. Help text to list selection setting on id 30024.
 msgctxt "#30025"
 msgid "Sample rate to which the stream is reduced."
 msgstr "Уровень частоты дискретизации, до которой уменьшается поток."
 
+#. Settings list selection about DSD2PCM mode, where does the SACD data conversion and downsampling to format used for playback in Kodi
 msgctxt "#30026"
 msgid "DSD2PCM mode"
 msgstr "Режим DSD2PCM"
 
+#. Help text to slider setting on id 30026.
 msgctxt "#30027"
 msgid "Processing mode of the stream to perform the best possible resampling."
 msgstr "Режим обработки потока для выполнения наилучшей передискретизации."
 
+#. List selection value about DSD2PCM mode, by setting defined with id 30026
 msgctxt "#30028"
 msgid "Multistage (32fp)"
 msgstr "Многоступенчатый (32fp)"
 
+#. List selection value about DSD2PCM mode, by setting defined with id 30026
 msgctxt "#30029"
 msgid "Multistage (64fp)"
 msgstr "Многоступенчатый (64fp)"
 
+#. List selection value about DSD2PCM mode, by setting defined with id 30026
 msgctxt "#30030"
 msgid "Direct (32fp, 30kHz lowpass)"
 msgstr "Прямой (32fp, 30kHz низкочастотный)"
 
+#. List selection value about DSD2PCM mode, by setting defined with id 30026
 msgctxt "#30031"
 msgid "Direct (64fp, 30kHz lowpass)"
 msgstr "Прямой (64fp, 30kHz низкочастотный)"
 
+#. List selection value about DSD2PCM mode, by setting defined with id 30026
 msgctxt "#30032"
 msgid "Installable FIR (32fp)"
 msgstr "Устанавливаемый FIR (32fp)"
 
+#. List selection value about DSD2PCM mode, by setting defined with id 30026
 msgctxt "#30033"
 msgid "Installable FIR (64fp)"
 msgstr "Устанавливаемый FIR (64fp)"
 
+#. Settings button to open file selection dialog about a usable FIR filter
 msgctxt "#30034"
 msgid "Select file with usable FIR filter"
 msgstr "Выберите файл с пригодным для использования FIR-фильтром"
 
+#. Help text to list selection setting on id 30034.
 msgctxt "#30035"
 msgid "To select finite impulse response (FIR) filter data stored in a file."
 msgstr "Для выбора данных фильтра с конечной импульсной характеристикой (FIR), хранящихся в файле."
 
+#. Header label to use one file selection dialog, where opened on button defined with id 30034
 msgctxt "#30036"
 msgid "FIR filter file"
 msgstr "Файл FIR-фильтра"
 
+#. To select prefereable area which should used, e.g. only stereo (and as fallback multichannel, if stereo not available)
+#. or to select multichannel (and as fallback stereo, if multichannel not available) or allow both (All) where default.
 msgctxt "#30037"
 msgid "Preferable area"
 msgstr "Предпочтительная область"
 
+#. Help text to list selection setting on id 30037.
 msgctxt "#30038"
 msgid "To select the songs for the respective number of speakers."
 msgstr "Выбор композиций для соответствующего количества динамиков."
 
+#. List selection value about preferable area, by setting defined with id 30037
 msgctxt "#30039"
 msgid "All"
 msgstr "Все"
 
+#. List selection value about preferable area, by setting defined with id 30037
 msgctxt "#30040"
 msgid "Stereo"
 msgstr "Стерео"
 
+#. List selection value about preferable area, by setting defined with id 30037
 msgctxt "#30041"
 msgid "Multichannel"
 msgstr "Многоканальный"
 
+#. List selection value about samplerate, by setting defined with id 30024
 msgctxt "#30042"
 msgid "44.1 kHz"
 msgstr "44.1 кГц"
 
+#. List selection value about samplerate, by setting defined with id 30024
 msgctxt "#30043"
 msgid "88.2 kHz"
 msgstr "88.2 кГц"
 
+#. List selection value about samplerate, by setting defined with id 30024
 msgctxt "#30044"
 msgid "176.4 kHz"
 msgstr "176,4 кГц"
 
+#. List selection value about samplerate, by setting defined with id 30024
 msgctxt "#30045"
 msgid "352.8 kHz"
 msgstr "352.8 кГц"
 
+#. Boolean setting to enable sort all stereo tracks first, then all multichannel tracks.
+msgctxt "#30050"
+msgid "Separate stereo and multichannel tracks"
+msgstr ""
+
+#. Help text to boolean setting on id 30050.
+msgctxt "#30051"
+msgid "Sort stereo tracks first, then all multichannel tracks."
+msgstr ""
+
+#. Boolean setting to allow play fallback if Multichannel selected and only Stereo available, or the other direction
+msgctxt "#30052"
+msgid "Fall back when preferred track area is empty"
+msgstr ""
+
+#. Help text to boolean setting on id 30052.
+msgctxt "#30053"
+msgid "If preferred tracks (stereo or multichannel) are not available, a different method is used to fall back."
+msgstr ""
+
+#. Format label about selectable volume in dB, for settings defined with label id 30020 and 30022
 msgctxt "#30070"
-msgid "{0:.0f} db"
-msgstr "{0:.0f} db"
+msgid "{0:.0f} dB"
+msgstr ""
+
+#~ msgctxt "#30070"
+#~ msgid "{0:.0f} db"
+#~ msgstr "{0:.0f} db"
