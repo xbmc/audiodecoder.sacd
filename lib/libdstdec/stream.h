@@ -18,8 +18,8 @@ namespace dst
 
 class stream_t {
 	const uint8_t* m_data;
-	int            m_size;
-	int            m_offset;
+	unsigned int   m_size;
+	unsigned int   m_offset;
 public:
 	stream_t() {
 		m_data = nullptr;
@@ -33,23 +33,23 @@ public:
 		m_offset = 0;
 	}
 
-	int get_offset() {
+	unsigned int get_offset() {
 		return m_offset;
 	}
 
-	int get_bit() {
+	bool get_bit() {
 		if (m_offset + 1 > 8 * m_size) {
-			kodiLog(ADDON_LOG_ERROR, "ERROR: read after end of stream");
-			return 0;
+			kodiLog(ADDON_LOG_ERROR, "read after end of stream");
+			return false;
 		}
 		uint32_t value = m_data[m_offset / 8];
 		value >>= 7 - m_offset % 8;
 		value &= 1;
 		m_offset++;
-		return value;
+		return (bool)value;
 	}
 
-	int get_sint(int length) {
+	int get_sint(unsigned int length) {
 		int value = (int)get_uint(length);
 		if (value >= (1 << (length - 1))) {
 			value -= (1 << length);
@@ -57,13 +57,13 @@ public:
 		return value;
 	}
 
-	uint32_t get_uint(int length) {
+	uint32_t get_uint(unsigned int length) {
 		if (m_offset + length > 8 * m_size) {
-			kodiLog(ADDON_LOG_ERROR, "ERROR: read after end of stream");
+			kodiLog(ADDON_LOG_ERROR, "read after end of stream");
 			return 0;
 		}
 		uint32_t value = 0;
-		for (auto i = 0; i < (m_offset % 8 + length + 7) / 8; i++) {
+		for (auto i = 0u; i < (m_offset % 8 + length + 7) / 8; i++) {
 			value = (value << 8) | m_data[m_offset / 8 + i];
 		}
 		value >>= 7 - (m_offset + length - 1) % 8;

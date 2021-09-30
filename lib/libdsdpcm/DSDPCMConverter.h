@@ -1,6 +1,6 @@
 /*
 * SACD Decoder plugin
-* Copyright (c) 2011-2020 Maxim V.Anisiutkin <maxim.anisiutkin@gmail.com>
+* Copyright (c) 2011-2021 Maxim V.Anisiutkin <maxim.anisiutkin@gmail.com>
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU Lesser General Public
@@ -30,10 +30,10 @@
 #endif
 
 enum class conv_type_e {
-	DSDPCM_CONV_UNKNOWN    = -1,
-	DSDPCM_CONV_MULTISTAGE =  0,
-	DSDPCM_CONV_DIRECT     =  1,
-	DSDPCM_CONV_USER       =  2
+	UNKNOWN    = -1,
+	MULTISTAGE =  0,
+	DIRECT     =  1,
+	USER       =  2
 };
 
 template<typename real_t>
@@ -58,7 +58,7 @@ public:
 		return delay;
 	}
 	virtual void init(DSDPCMFilterSetup<real_t>& flt_setup, int dsd_samples) = 0;
-	virtual int convert(uint8_t* dsd_data, real_t* m_pcm_data, int dsd_samples) = 0;
+	virtual int convert(uint8_t* dsd_data, real_t* pcm_data, int dsd_samples) = 0;
 protected:
 	void alloc_pcm_temp1(int pcm_samples) {
 		free_pcm_temp1();

@@ -25,23 +25,23 @@
 
 #define DSD_SILENCE_BYTE 0x69
 
-void dst_run_thread(frame_slot_t* slot) {
-	while (slot->run_slot) {
-		slot->dst_semaphore.wait();
-		if (slot->run_slot) {
-			slot->state = slot_state_t::SLOT_RUNNING;
-			slot->dec.decode(slot->dst_data, slot->dst_size * 8, slot->dsd_data);
-			slot->state = slot_state_t::SLOT_READY;
+static void dst_run_thread(frame_slot_t& slot) {
+	while (slot.run_slot) {
+		slot.dst_semaphore.wait();
+		if (slot.run_slot) {
+			slot.state = slot_state_t::SLOT_RUNNING;
+			slot.dec.decode(slot.dst_data, slot.dst_size * 8, slot.dsd_data);
+			slot.state = slot_state_t::SLOT_READY;
 		}
 		else {
-			slot->dsd_data = nullptr;
-			slot->dst_size = 0;
+			slot.dsd_data = nullptr;
+			slot.dst_size = 0;
 		}
-		slot->dsd_semaphore.notify();
+		slot.dsd_semaphore.notify();
 	}
 }
 
-dst_decoder_t::dst_decoder_t(int threads) {
+dst_decoder_t::dst_decoder_t(unsigned int threads) {
 	frame_slots.resize(threads);
 	slot_nr            = 0;
 	channel_count      = 0;
@@ -58,11 +58,11 @@ dst_decoder_t::~dst_decoder_t() {
 	}
 }   
 
-int dst_decoder_t::get_slot_nr() {
+unsigned int dst_decoder_t::get_slot_nr() {
 	return slot_nr;
 }
 
-int dst_decoder_t::init(int channels, int samplerate, int framerate) {
+int dst_decoder_t::init(unsigned int channels, unsigned int samplerate, unsigned int framerate) {
 	channel_count = channels;
 	channel_frame_size = samplerate / 8 / framerate;
 	for (auto& slot : frame_slots)	{
@@ -71,14 +71,14 @@ int dst_decoder_t::init(int channels, int samplerate, int framerate) {
 			slot.channel_frame_size = channel_frame_size;
 			slot.dsd_size = (size_t)(channel_count * channel_frame_size);
 			slot.run_slot = true;
-			slot.run_thread = thread(dst_run_thread, &slot);
+			slot.run_thread = thread(dst_run_thread, ref(slot));
 			if (!slot.run_thread.joinable()) {
-				kodiLog(ADDON_LOG_ERROR, "Could not start decoder thread");
+				kodiLog(ADDON_LOG_ERROR, ("Could not start decoder thread"));
 				return -1;
 			}
 		}
 		else {
-			kodiLog(ADDON_LOG_ERROR, "Could not initialize decoder slot");
+			kodiLog(ADDON_LOG_ERROR, ("Could not initialize decoder slot"));
 			return -1;
 		}
 	}

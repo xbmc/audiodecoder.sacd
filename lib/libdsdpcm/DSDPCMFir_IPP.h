@@ -19,11 +19,8 @@
 
 #pragma once
 
-#include <algorithm>
 #include "DSDPCMConstants.h"
 #include "Fir_IPP.h"
-
-using std::max;
 
 template<typename real_t>
 class DSDPCMFir {
@@ -56,14 +53,14 @@ public:
 	float get_delay() {
 		return (float)fir_order / 2 / 8 / decimation;
 	}
-	void init(ctable_t* fir_ctables, int fir_length, int decimation) {
-		this->fir_ctables = fir_ctables;
-		this->fir_order = fir_length - 1;
-		this->fir_length = CTABLES(fir_length);
-		this->decimation = decimation / 8;
-		this->fir_dly = ippsMalloc_8u(this->fir_length);
-		memset(this->fir_dly, DSD_SILENCE_BYTE, this->fir_length);
-		this->fir_out = (sizeof(real_t) == sizeof(float)) ? reinterpret_cast<real_t*>(ippsMalloc_32f(fir_length)) : reinterpret_cast<real_t*>(ippsMalloc_64f(fir_length));
+	void init(ctable_t* p_fir_ctables, int p_fir_length, int p_decimation) {
+		fir_ctables = p_fir_ctables;
+		fir_order = p_fir_length - 1;
+		fir_length = CTABLES(p_fir_length);
+		decimation = p_decimation / 8;
+		fir_dly = ippsMalloc_8u(fir_length);
+		memset(fir_dly, DSD_SILENCE_BYTE, fir_length);
+		fir_out = (sizeof(real_t) == sizeof(float)) ? reinterpret_cast<real_t*>(ippsMalloc_32f(p_fir_length)) : reinterpret_cast<real_t*>(ippsMalloc_64f(p_fir_length));
 	}
 	void free() {
 		if (fir_dly) {
@@ -75,20 +72,20 @@ public:
 			fir_out = nullptr;
 		}
 	}
-	int run(uint8_t* dsd_data, real_t* m_pcm_data, int dsd_samples) {
-		int pcm_samples = dsd_samples / decimation;
-		int fir_index = 0;
-		for (int sample = 0; sample < pcm_samples; sample++) {
-			for (int j = 0; j < fir_length - fir_index; j++) {
+	int run(uint8_t* p_dsd_data, real_t* p_pcm_data, int p_dsd_samples) {
+		auto pcm_samples = p_dsd_samples / decimation;
+		auto fir_index = 0;
+		for (auto sample = 0; sample < pcm_samples; sample++) {
+			for (auto j = 0; j < fir_length - fir_index; j++) {
 				fir_out[j] = fir_ctables[j][fir_dly[fir_index + j]];
 			}
-			for (int j = max(fir_length - fir_index, 0); j < fir_length; j++) {
-				fir_out[j] = fir_ctables[j][dsd_data[j - (fir_length - fir_index)]];
+			for (auto j = (fir_length > fir_index) ? fir_length - fir_index : 0; j < fir_length; j++) {
+				fir_out[j] = fir_ctables[j][p_dsd_data[j - (fir_length - fir_index)]];
 			}
 			fir_index += decimation;
-			Fir_IPP::Sum(fir_out, fir_length, &m_pcm_data[sample]);
+			Fir_IPP::Sum(fir_out, fir_length, &p_pcm_data[sample]);
 		}
-		ippsCopy_8u(&dsd_data[dsd_samples - fir_length], fir_dly, fir_length);
+		ippsCopy_8u(&p_dsd_data[p_dsd_samples - fir_length], fir_dly, fir_length);
 		return pcm_samples;
 	}
 };

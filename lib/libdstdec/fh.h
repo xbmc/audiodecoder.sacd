@@ -20,36 +20,37 @@ namespace dst
 
 class fh_t {
 public:
-	int       NrOfChannels;                                       // Number of channels in the recording
-	int       NrOfFilters;                                        // Number of filters used for this frame
-	int       NrOfPtables;                                        // Number of Ptables used for this frame
-	vector<int> PredOrder;                                        // Prediction order used for this frame
-	vector<int> PtableLen;                                        // Nr of Ptable entries used for this frame
+	unsigned int       NrOfChannels;                                       // Number of channels in the recording
+	unsigned int       NrOfFilters;                                        // Number of filters used for this frame
+	unsigned int       NrOfPtables;                                        // Number of Ptables used for this frame
+	vector<unsigned int> PredOrder;                                        // Prediction order used for this frame
+	vector<unsigned int> PtableLen;                                        // Nr of Ptable entries used for this frame
 	vector<array<int16_t, 1 << SIZE_CODEDPREDORDER>> ICoefA;      // Integer coefs for actual coding
-	bool      DSTCoded;                                           // true if DST coded is put in DST stream, false if DSD is put in DST stream
-	int       CalcNrOfBytes;                                      // Contains number of bytes of the complete channel stream after arithmetic encoding (also containing bytestuff-, ICoefA-bits, etc.)
-	int       CalcNrOfBits;                                       // Contains number of bits of the complete channel stream after arithmetic encoding (also containing bytestuff-, ICoefA-bits, etc.)
-	vector<int> HalfProb;                                         // Defines per channel which probability is applied for the first PredOrder[] bits of a frame (0 = use Ptable entry, 1 = 128)
-	vector<int> NrOfHalfBits;                                     // Defines per channel how many bits at the start of each frame are optionally coded with p=0.5
+	unsigned int       CalcNrOfBytes;                                      // Contains number of bytes of the complete channel stream after arithmetic encoding (also containing bytestuff-, ICoefA-bits, etc.)
+	unsigned int       CalcNrOfBits;                                       // Contains number of bits of the complete channel stream after arithmetic encoding (also containing bytestuff-, ICoefA-bits, etc.)
+	vector<unsigned int> HalfProb;                                         // Defines per channel which probability is applied for the first PredOrder[] bits of a frame (0 = use Ptable entry, 1 = 128)
+	vector<unsigned int> NrOfHalfBits;                                     // Defines per channel how many bits at the start of each frame are optionally coded with p=0.5
 	segment_t FSegment;                                           // Contains segmentation data for filters
 	vector<vector<uint8_t>> Filter4Bit;                           // Filter4Bit[ChNr][BitNr]
 	segment_t PSegment;                                           // Contains segmentation data for Ptables
 	vector<vector<uint8_t>> Ptable4Bit;                           // Ptable4Bit[ChNr][BitNr]
+	bool      DSTCoded;                                           // true if DST coded is put in DST stream, false if DSD is put in DST stream
 	bool      PSameSegAsF;                                        // true if segmentation is equal for F and P
 	bool      PSameMapAsF;                                        // true if mapping is equal for F and P
 	bool      FSameSegAllCh;                                      // true if all channels have same Filtersegm
 	bool      FSameMapAllCh;                                      // true if all channels have same Filtermap
 	bool      PSameSegAllCh;                                      // true if all channels have same Ptablesegm
 	bool      PSameMapAllCh;                                      // true if all channels have same Ptablemap
-	int       SegAndMapBits;                                      // Number of bits in the stream for Seg&Map
-	int       MaxNrOfFilters;                                     // Max. nr. of filters allowed per frame
-	int       MaxNrOfPtables;                                     // Max. nr. of Ptables allowed per frame
-	int       MaxFrameLen;                                        // Max frame length of stream
-	int       ByteStreamLen;                                      // MaxFrameLen * NrOfChannels
-	int       BitStreamLen;                                       // ByteStreamLen * RESOL
-	int       NrOfBitsPerCh;                                      // MaxFrameLen * RESOL
+	bool      unused;
+	unsigned int       SegAndMapBits;                                      // Number of bits in the stream for Seg&Map
+	unsigned int       MaxNrOfFilters;                                     // Max. nr. of filters allowed per frame
+	unsigned int       MaxNrOfPtables;                                     // Max. nr. of Ptables allowed per frame
+	unsigned int       MaxFrameLen;                                        // Max frame length of stream
+	unsigned int       ByteStreamLen;                                      // MaxFrameLen * NrOfChannels
+	unsigned int       BitStreamLen;                                       // ByteStreamLen * RESOL
+	unsigned int       NrOfBitsPerCh;                                      // MaxFrameLen * RESOL
 public:
-	void init(int channels, int channel_frame_size) {
+	void init(unsigned int channels, unsigned int channel_frame_size) {
 		NrOfChannels = channels;
 		MaxFrameLen = channel_frame_size;
 		ByteStreamLen = MaxFrameLen * NrOfChannels;

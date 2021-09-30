@@ -27,13 +27,13 @@ class ac_t {
 	int cbptr;
 public:
 
-	int getPtableIndex(int PredicVal, int PtableLen) {
+	unsigned int getPtableIndex(int PredicVal, int PtableLen) {
 		int j;
 		j = (PredicVal > 0 ? PredicVal : -PredicVal) >> AC_QSTEP;
 		if (j >= PtableLen) {
 			j = PtableLen - 1;
 		}
-		return j;
+		return (unsigned int)j;
 	}
 
 	void decodeBit(uint8_t& b, int p, uint8_t* cb, int fs, int flush) {
@@ -129,6 +129,7 @@ public:
 	}
 
 	void decodeBit_Flush(uint8_t* b, int p, uint8_t* cb, int fs) {
+		(void)p;
 		Init = 1;
 		if (cbptr < fs - 7) {
 			*b = 0;

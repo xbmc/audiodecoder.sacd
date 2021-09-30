@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="audiodecoder.sacd"
-  version="0.1.2"
+  version="19.0.0"
   name="SACD ISO support"
   provider-name="Team Kodi, AlwinEsch">
   <requires>@ADDON_DEPENDS@</requires>
   <extension
     point="kodi.audiodecoder"
     name="sacd"
-    extension=".iso|.sacdstream"
+    extension=".iso|.sacd|.sacdstream"
     tracks="true"
     tags="true"
     library_@PLATFORM@="@LIBRARY_FILENAME@"/>
@@ -18,6 +18,7 @@
     <source>https://github.com/xbmc/audiodecoder.sacd</source>
     <assets>
       <icon>icon.png</icon>
+      <fanart>fanart.jpg</fanart>
     </assets>
     <summary lang="da_DK">Super Audio CD ISO-billede</summary>
     <summary lang="de_DE">Super Audio CD ISO-Image</summary>

@@ -49,7 +49,7 @@ bool sacd_core_t::g_is_our_content_type(const std::string& p_type)
 bool sacd_core_t::g_is_our_path(const std::string& path, const std::string& ext)
 {
   std::string filename_ext = kodi::vfs::GetFileName(path);
-  return ((icasecmp(ext, "ISO") || icasecmp(ext, "DAT")) && sacd_disc_t::g_is_sacd(path.c_str())) ||
+  return ((icasecmp(ext, "ISO") || icasecmp(ext, "SACD") || icasecmp(ext, "DAT")) && sacd_disc_t::g_is_sacd(path.c_str())) ||
          icasecmp(ext, "DFF") || icasecmp(ext, "DSF"); /* ||
          (icasecmp(filename_ext, "") || icasecmp(filename_ext, "MASTER1.TOC")) &&
              path.length() > 7 && sacd_disc_t::g_is_sacd(path[7]);*/
@@ -74,6 +74,10 @@ bool sacd_core_t::open(const std::string& path)
   {
     media_type = media_type_e::ISO;
   }
+  else if (icasecmp(ext, "SACD"))
+  {
+    media_type = media_type_e::ISO;
+  }
   else if (icasecmp(ext, "DFF"))
   {
     media_type = media_type_e::DSDIFF;
@@ -91,7 +95,7 @@ bool sacd_core_t::open(const std::string& path)
   }*/
   if (media_type == media_type_e::INVALID)
   {
-    kodi::Log(ADDON_LOG_ERROR, "unsupported format '%s'\n", path.c_str());
+    kodi::Log(ADDON_LOG_ERROR, "unsupported format '%s'", path.c_str());
     return false;
   }
   if (is_sacd_disc)
@@ -99,7 +103,7 @@ bool sacd_core_t::open(const std::string& path)
     sacd_media = std::make_unique<sacd_media_disc_t>();
     if (!sacd_media)
     {
-      kodi::Log(ADDON_LOG_ERROR, "memory overflow '%s'\n", path.c_str());
+      kodi::Log(ADDON_LOG_ERROR, "memory overflow '%s'", path.c_str());
       return false;
     }
   }
@@ -108,7 +112,7 @@ bool sacd_core_t::open(const std::string& path)
     sacd_media = std::make_unique<sacd_media_file_t>();
     if (!sacd_media)
     {
-      kodi::Log(ADDON_LOG_ERROR, "memory overflow '%s'\n", path.c_str());
+      kodi::Log(ADDON_LOG_ERROR, "memory overflow '%s'", path.c_str());
       return false;
     }
   }
@@ -118,7 +122,7 @@ bool sacd_core_t::open(const std::string& path)
       sacd_reader = std::make_unique<sacd_disc_t>();
       if (!sacd_reader)
       {
-        kodi::Log(ADDON_LOG_ERROR, "memory overflow '%s'\n", path.c_str());
+        kodi::Log(ADDON_LOG_ERROR, "memory overflow '%s'", path.c_str());
         return false;
       }
       break;
@@ -126,7 +130,7 @@ bool sacd_core_t::open(const std::string& path)
       sacd_reader = std::make_unique<sacd_dsdiff_t>();
       if (!sacd_reader)
       {
-        kodi::Log(ADDON_LOG_ERROR, "memory overflow '%s'\n", path.c_str());
+        kodi::Log(ADDON_LOG_ERROR, "memory overflow '%s'", path.c_str());
         return false;
       }
       break;
@@ -134,43 +138,51 @@ bool sacd_core_t::open(const std::string& path)
       sacd_reader = std::make_unique<sacd_dsf_t>();
       if (!sacd_reader)
       {
-        kodi::Log(ADDON_LOG_ERROR, "memory overflow '%s'\n", path.c_str());
+        kodi::Log(ADDON_LOG_ERROR, "memory overflow '%s'", path.c_str());
         return false;
       }
       break;
     default:
-      kodi::Log(ADDON_LOG_ERROR, "unsupported format %i on '%s'\n", media_type, path.c_str());
+      kodi::Log(ADDON_LOG_ERROR, "unsupported format %i on '%s'", media_type, path.c_str());
       return false;
-  }
-  access_mode = ACCESS_MODE_NULL;
-  switch (CSACDSettings::GetInstance().GetSpeakerArea())
-  {
-    case 0:
-      access_mode |= ACCESS_MODE_TWOCH | ACCESS_MODE_MULCH;
-      break;
-    case 1:
-      access_mode |= ACCESS_MODE_TWOCH;
-      break;
-    case 2:
-      access_mode |= ACCESS_MODE_MULCH;
-      break;
-  }
-  if (CSACDSettings::GetInstance().GetFullPlayback())
-  {
-    access_mode |= ACCESS_MODE_FULL_PLAYBACK;
   }
 
   if (!sacd_media->open(path, false))
   {
-    kodi::Log(ADDON_LOG_ERROR, "Failed to open media type %i on '%s'\n", media_type, path.c_str());
+    kodi::Log(ADDON_LOG_ERROR, "Failed to open media type %i on '%s'", media_type, path.c_str());
     return false;
   }
 
   if (!sacd_reader->open(sacd_media.get()))
   {
-    kodi::Log(ADDON_LOG_ERROR, "Failed to open media reader for type %i on '%s'\n", media_type,
+    kodi::Log(ADDON_LOG_ERROR, "Failed to open media reader for type %i on '%s'", media_type,
               path.c_str());
     return false;
+  }
+
+  access_mode = ACCESS_MODE_NULL;
+  switch (CSACDSettings::GetInstance().GetSpeakerArea())
+  {
+    case AREA_TWOCH:
+      if (sacd_reader->get_track_count(AREA_TWOCH) == 0)
+        access_mode |= ACCESS_MODE_MULCH;
+      else
+        access_mode |= ACCESS_MODE_TWOCH;
+      break;
+    case AREA_MULCH:
+      if (sacd_reader->get_track_count(AREA_MULCH) == 0)
+        access_mode |= ACCESS_MODE_TWOCH;
+      else
+        access_mode |= ACCESS_MODE_MULCH;
+      break;
+    default:
+      access_mode |= ACCESS_MODE_TWOCH | ACCESS_MODE_MULCH;
+      break;
+  }
+
+  if (CSACDSettings::GetInstance().GetFullPlayback())
+  {
+    access_mode |= ACCESS_MODE_FULL_PLAYBACK;
   }
 
   sacd_reader->set_mode(access_mode);

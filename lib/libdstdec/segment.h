@@ -19,12 +19,12 @@ namespace dst
 
 class segment_t {
 public:
-	int Resolution;                                 // Resolution for segments
-	vector<array<int, MAXNROF_SEGS>> SegmentLength; // SegmentLength[ChNr][SegmentNr]
-	vector<int> NrOfSegments;                       // NrOfSegments[ChNr]
-	vector<array<int, MAXNROF_SEGS>> Table4Segment; // Table4Segment[ChNr][SegmentNr]
+	unsigned int Resolution;                                 // Resolution for segments
+	vector<array<unsigned int, MAXNROF_SEGS>> SegmentLength; // SegmentLength[ChNr][SegmentNr]
+	vector<unsigned int> NrOfSegments;                       // NrOfSegments[ChNr]
+	vector<array<unsigned int, MAXNROF_SEGS>> Table4Segment; // Table4Segment[ChNr][SegmentNr]
 public:
-	void init(int channels) {
+	void init(unsigned int channels) {
 		SegmentLength.resize(channels);
 		NrOfSegments.resize(channels);
 		Table4Segment.resize(channels);

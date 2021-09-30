@@ -12,6 +12,7 @@
  */
 
 #include "sacd_disc.h"
+#include "../Settings.h"
 
 #include <algorithm>
 #include <iconv.h>
@@ -824,7 +825,8 @@ void sacd_disc_t::get_info(uint32_t track_number, kodi::addon::AudioDecoderInfoT
     return;
   }
 
-  info.SetTrack((track_index == -1) ? 1 : track_index + 1);
+  bool separateMultichannel = CSACDSettings::GetInstance().GetSeparateMultichannel() && area->area_toc->channel_count > 2;
+  info.SetTrack(((track_index == -1) ? 1 : track_index + 1) + (separateMultichannel ? get_track_count(AREA_TWOCH) : 0));
   if (area->area_toc->track_count > 0)
   {
   }

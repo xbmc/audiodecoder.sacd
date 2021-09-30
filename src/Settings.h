@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2020 Team Kodi <https://kodi.tv>
+ *  Copyright (C) 2020-2021 Team Kodi <https://kodi.tv>
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSE.md for more information.
@@ -32,6 +32,8 @@ public:
   bool GetConverterFp64() const;
   int GetSpeakerArea() const { return m_speakerArea; }
   bool GetFullPlayback() const { return false; } // unused
+  bool GetSeparateMultichannel() const { return m_speakerArea == 0 && m_separateMultichannel; }
+  bool GetAreaAllowFallback() const { return m_areaAllowFallback; }
 
 private:
   CSACDSettings() = default;
@@ -42,4 +44,6 @@ private:
   int m_dsd2pcmMode = 0;
   std::string m_dsd2pcmFirFile;
   int m_speakerArea = 0;
+  bool m_separateMultichannel = false;
+  bool m_areaAllowFallback = true;
 };

@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 project(libdsdpcm)
 
+set(CMAKE_CXX_STANDARD 17)
+
 # Include directory paths
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_SOURCE_DIR}/binding

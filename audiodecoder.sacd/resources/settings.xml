@@ -79,7 +79,7 @@
 
         <setting id="area" type="integer" label="30037" help="30038">
           <level>0</level>
-          <default>0</default>
+          <default>2</default>
           <constraints>
             <options>
               <option label="30039">0</option>
@@ -89,6 +89,33 @@
           </constraints>
           <control type="list" format="integer" />
         </setting>
+
+        <setting id="separate-multichannel" type="boolean" label="30050" help="30051">
+          <level>0</level>
+          <default>false</default>
+          <dependencies>
+            <dependency type="enable">
+              <or>
+                <condition setting="area" operator="is">0</condition>
+              </or>
+            </dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+
+        <setting id="area-allow-fallback" type="boolean" label="30052" help="30053">
+          <level>2</level>
+          <default>true</default>
+          <dependencies>
+            <dependency type="enable">
+              <or>
+                <condition setting="area" operator="!is">0</condition>
+              </or>
+            </dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+
       </group>
     </category>
   </section>

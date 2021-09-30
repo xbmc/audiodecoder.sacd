@@ -20,6 +20,8 @@ add_subdirectory(lib/libdsdpcm)
 add_subdirectory(lib/libdstdec)
 add_subdirectory(lib/id3v2lib)
 
+set(CMAKE_CXX_STANDARD 17)
+
 set(SACD_SOURCES src/Addon.cpp
                  src/SACDAudio.cpp
                  src/Settings.cpp
