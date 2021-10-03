@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Addons\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/audiodecoder.sacd/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2021-08-24 13:29+0000\n"
+"PO-Revision-Date: 2021-10-03 11:47+0000\n"
 "Last-Translator: Minho Park <parkmino@gmail.com>\n"
 "Language-Team: Korean <https://kodi.weblate.cloud/projects/kodi-add-ons-audio-decodersencoders/audiodecoder-sacd/ko_kr/>\n"
 "Language: ko_kr\n"
@@ -166,27 +166,27 @@ msgstr "352.8 kHz"
 #. Boolean setting to enable sort all stereo tracks first, then all multichannel tracks.
 msgctxt "#30050"
 msgid "Separate stereo and multichannel tracks"
-msgstr ""
+msgstr "스테레오 및 다중 채널 트랙 분리"
 
 #. Help text to boolean setting on id 30050.
 msgctxt "#30051"
 msgid "Sort stereo tracks first, then all multichannel tracks."
-msgstr ""
+msgstr "먼저 스테레오 트랙을 정렬한 다음, 모든 다중 채널 트랙을 정렬합니다."
 
 #. Boolean setting to allow play fallback if Multichannel selected and only Stereo available, or the other direction
 msgctxt "#30052"
 msgid "Fall back when preferred track area is empty"
-msgstr ""
+msgstr "선호하는 트랙 영역이 비어 있을 때 대체"
 
 #. Help text to boolean setting on id 30052.
 msgctxt "#30053"
 msgid "If preferred tracks (stereo or multichannel) are not available, a different method is used to fall back."
-msgstr ""
+msgstr "선호하는 트랙(스테레오 또는 다중 채널)을 사용할 수 없는 경우 다른 방법을 사용하여 대체합니다."
 
 #. Format label about selectable volume in dB, for settings defined with label id 30020 and 30022
 msgctxt "#30070"
 msgid "{0:.0f} dB"
-msgstr ""
+msgstr "{0:.0f} dB"
 
 #~ msgctxt "#30070"
 #~ msgid "{0:.0f} db"

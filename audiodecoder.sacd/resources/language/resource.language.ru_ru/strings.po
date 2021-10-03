@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Addons\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/audiodecoder.sacd/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2021-07-26 16:29+0000\n"
+"PO-Revision-Date: 2021-10-03 11:47+0000\n"
 "Last-Translator: vdkbsd <valexgus@gmail.com>\n"
 "Language-Team: Russian <https://kodi.weblate.cloud/projects/kodi-add-ons-audio-decodersencoders/audiodecoder-sacd/ru_ru/>\n"
 "Language: ru_ru\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.7.2\n"
+"X-Generator: Weblate 4.8\n"
 
 msgctxt "Addon Summary"
 msgid "Super Audio CD ISO image"
@@ -166,27 +166,27 @@ msgstr "352.8 кГц"
 #. Boolean setting to enable sort all stereo tracks first, then all multichannel tracks.
 msgctxt "#30050"
 msgid "Separate stereo and multichannel tracks"
-msgstr ""
+msgstr "Разделять стерео и многоканальные дорожки"
 
 #. Help text to boolean setting on id 30050.
 msgctxt "#30051"
 msgid "Sort stereo tracks first, then all multichannel tracks."
-msgstr ""
+msgstr "Отсортировать сначала стереодорожки, затем все многоканальные дорожки."
 
 #. Boolean setting to allow play fallback if Multichannel selected and only Stereo available, or the other direction
 msgctxt "#30052"
 msgid "Fall back when preferred track area is empty"
-msgstr ""
+msgstr "Вернуться назад, если выбранная дорожка отсутствует"
 
 #. Help text to boolean setting on id 30052.
 msgctxt "#30053"
 msgid "If preferred tracks (stereo or multichannel) are not available, a different method is used to fall back."
-msgstr ""
+msgstr "Если выбранные дорожки (стерео или многоканальные) недоступны, для возврата назад будет выбран другой метод."
 
 #. Format label about selectable volume in dB, for settings defined with label id 30020 and 30022
 msgctxt "#30070"
 msgid "{0:.0f} dB"
-msgstr ""
+msgstr "{0:.0f} dB"
 
 #~ msgctxt "#30070"
 #~ msgid "{0:.0f} db"
