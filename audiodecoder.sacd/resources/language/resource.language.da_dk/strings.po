@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Addons\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/audiodecoder.sacd/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2021-08-04 12:29+0000\n"
+"PO-Revision-Date: 2021-10-08 14:30+0000\n"
 "Last-Translator: Christian Gade <gade@kodi.tv>\n"
 "Language-Team: Danish <https://kodi.weblate.cloud/projects/kodi-add-ons-audio-decodersencoders/audiodecoder-sacd/da_dk/>\n"
 "Language: da_dk\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.7.2\n"
+"X-Generator: Weblate 4.8\n"
 
 msgctxt "Addon Summary"
 msgid "Super Audio CD ISO image"
@@ -166,27 +166,27 @@ msgstr "352.8 kHz"
 #. Boolean setting to enable sort all stereo tracks first, then all multichannel tracks.
 msgctxt "#30050"
 msgid "Separate stereo and multichannel tracks"
-msgstr ""
+msgstr "Separate stereo- og multikanalsspor"
 
 #. Help text to boolean setting on id 30050.
 msgctxt "#30051"
 msgid "Sort stereo tracks first, then all multichannel tracks."
-msgstr ""
+msgstr "Sorter stereospor først, derefter alle multikanalspor."
 
 #. Boolean setting to allow play fallback if Multichannel selected and only Stereo available, or the other direction
 msgctxt "#30052"
 msgid "Fall back when preferred track area is empty"
-msgstr ""
+msgstr "Vend tilbage, når det foretrukne sporområde er tomt"
 
 #. Help text to boolean setting on id 30052.
 msgctxt "#30053"
 msgid "If preferred tracks (stereo or multichannel) are not available, a different method is used to fall back."
-msgstr ""
+msgstr "Hvis foretrukne spor (stereo eller multikanal) ikke er tilgængelige, bruges en anden metode til at falde tilbage på."
 
 #. Format label about selectable volume in dB, for settings defined with label id 30020 and 30022
 msgctxt "#30070"
 msgid "{0:.0f} dB"
-msgstr ""
+msgstr "{0:.0f} dB"
 
 #~ msgctxt "#30070"
 #~ msgid "{0:.0f} db"
