@@ -1,3 +1,6 @@
+v19.0.1:
+- Translation updates by Weblate
+
 v19.0.0:
 - Fixed fallback if selected tracks not available
   - If user select multichannel tracks and not available it fallback now to use stereo, just as well in others, if he prefers stereo.
