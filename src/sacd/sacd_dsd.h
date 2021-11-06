@@ -21,7 +21,7 @@
 
 #pragma pack(1)
 
-class ATTRIBUTE_HIDDEN ID
+class ATTR_DLL_LOCAL ID
 {
   char ckID[4];
 
@@ -40,7 +40,7 @@ public:
   }
 };
 
-class ATTRIBUTE_HIDDEN Chunk : public ID
+class ATTR_DLL_LOCAL Chunk : public ID
 {
 public:
   uint64_t ckDataSize;
@@ -48,13 +48,13 @@ public:
   void set_size(uint64_t size) { ckDataSize = hton64(size); }
 };
 
-class ATTRIBUTE_HIDDEN FormDSDChunk : public Chunk
+class ATTR_DLL_LOCAL FormDSDChunk : public Chunk
 {
 public:
   ID formType;
 };
 
-class ATTRIBUTE_HIDDEN DSTFrameIndex
+class ATTR_DLL_LOCAL DSTFrameIndex
 {
 public:
   uint64_t offset;
@@ -69,7 +69,7 @@ enum MarkType
   Index = 4
 };
 
-class ATTRIBUTE_HIDDEN Marker
+class ATTR_DLL_LOCAL Marker
 {
 public:
   uint16_t hours;
@@ -83,7 +83,7 @@ public:
   uint32_t count;
 };
 
-class ATTRIBUTE_HIDDEN FmtDSFChunk : public Chunk
+class ATTR_DLL_LOCAL FmtDSFChunk : public Chunk
 {
 public:
   uint32_t format_version;
@@ -99,7 +99,7 @@ public:
 
 #pragma pack()
 
-class ATTRIBUTE_HIDDEN track_time_t
+class ATTR_DLL_LOCAL track_time_t
 {
 public:
   double start_time;

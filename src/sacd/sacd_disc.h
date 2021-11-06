@@ -20,7 +20,7 @@
 constexpr int SACD_PSN_SIZE = 2064;
 constexpr int MAX_DST_SIZE = 1024 * 64;
 
-typedef struct ATTRIBUTE_HIDDEN
+typedef struct ATTR_DLL_LOCAL
 {
   uint8_t data[MAX_DST_SIZE];
   int size;
@@ -31,7 +31,7 @@ typedef struct ATTRIBUTE_HIDDEN
   int dst_encoded;
 } audio_frame_t;
 
-class ATTRIBUTE_HIDDEN sacd_disc_t : public sacd_reader_t
+class ATTR_DLL_LOCAL sacd_disc_t : public sacd_reader_t
 {
 private:
   sacd_media_t* m_file;

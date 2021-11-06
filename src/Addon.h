@@ -9,7 +9,7 @@
 
 #include <kodi/AddonBase.h>
 
-class ATTRIBUTE_HIDDEN CMyAddon : public kodi::addon::CAddonBase
+class ATTR_DLL_LOCAL CMyAddon : public kodi::addon::CAddonBase
 {
 public:
   CMyAddon();

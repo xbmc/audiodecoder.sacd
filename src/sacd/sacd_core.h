@@ -18,7 +18,7 @@
 #include "sacd_dsf.h"
 #include "sacd_reader.h"
 
-class ATTRIBUTE_HIDDEN sacd_core_t
+class ATTR_DLL_LOCAL sacd_core_t
 {
 public:
   static bool g_is_our_content_type(const std::string& type);
