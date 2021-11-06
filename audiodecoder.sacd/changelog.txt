@@ -1,3 +1,10 @@
+v20.1.0:
+- Translation updates by Weblate
+- Kodi audiodecoder API update to version 4.0.0
+  - New used API support to scan about cover art image
+  - New used API function use to scan about file support
+  - New used API support to show and give infos of allowed extensions by addon
+
 v20.0.0:
 - Increased version to 20.0.0
   - This addon version relates to Kodi 20 Nexus version

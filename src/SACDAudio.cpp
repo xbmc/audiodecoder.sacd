@@ -9,11 +9,35 @@
 
 #include "Settings.h"
 
+#include <kodi/tools/StringUtils.h>
 #include <regex>
+
+namespace
+{
+
+std::string getFileExt(const std::string& s)
+{
+  size_t i = s.rfind('.', s.length());
+  if (i != std::string::npos)
+  {
+    return (s.substr(i + 1, s.length() - i));
+  }
+
+  return ("");
+}
+
+}
 
 CSACDAudioDecoder::CSACDAudioDecoder(KODI_HANDLE instance, const std::string& version)
   : CInstanceAudioDecoder(instance, version)
 {
+}
+
+bool CSACDAudioDecoder::SupportsFile(const std::string& filename)
+{
+  int track = 0;
+  const std::string toLoad = GetTrackName(filename, track);
+  return sacd_disc_t::g_is_sacd(toLoad);
 }
 
 bool CSACDAudioDecoder::Init(const std::string& filename,
@@ -130,7 +154,7 @@ bool CSACDAudioDecoder::Init(const std::string& filename,
   return true;
 }
 
-int CSACDAudioDecoder::ReadPCM(uint8_t* buffer, int size, int& actualsize)
+int CSACDAudioDecoder::ReadPCM(uint8_t* buffer, size_t size, size_t& actualsize)
 {
   /*
    * Check for cases where on call before not enough buffer was available and
@@ -153,7 +177,7 @@ int CSACDAudioDecoder::ReadPCM(uint8_t* buffer, int size, int& actualsize)
     }
 
     memcpy(buffer, currentPtr, actualsize);
-    return 0;
+    return AUDIODECODER_READ_SUCCESS;
   }
 
   /*
@@ -186,13 +210,13 @@ int CSACDAudioDecoder::ReadPCM(uint8_t* buffer, int size, int& actualsize)
                 m_dstDecoder->init(sacd_reader->get_channels(), sacd_reader->get_samplerate(),
                                    sacd_reader->get_framerate()) != 0)
             {
-              return false;
+              return AUDIODECODER_READ_ERROR;
             }
           }
           m_dstDecoder->decode(frame_data, frame_size, &dsd_data, &dsd_size);
           break;
         default:
-          return 1;
+          return AUDIODECODER_READ_ERROR;
       }
       m_sacdBitrateIdx = (++m_sacdBitrateIdx) % BITRATE_AVGS;
       m_sacdBitrateSum -= m_sacdBitrate[m_sacdBitrateIdx];
@@ -236,10 +260,10 @@ int CSACDAudioDecoder::ReadPCM(uint8_t* buffer, int size, int& actualsize)
   else
   {
     actualsize = 0;
-    return -1;
+    return AUDIODECODER_READ_EOF;
   }
 
-  return 0;
+  return AUDIODECODER_READ_SUCCESS;
 }
 
 int64_t CSACDAudioDecoder::Seek(int64_t time)
@@ -251,18 +275,76 @@ int64_t CSACDAudioDecoder::Seek(int64_t time)
   return time;
 }
 
-bool CSACDAudioDecoder::ReadTag(const std::string& file, kodi::addon::AudioDecoderInfoTag& tag)
+bool CSACDAudioDecoder::ReadTag(const std::string& filename, kodi::addon::AudioDecoderInfoTag& tag)
 {
   /*
    * get the track name from path
    */
   int track = 0;
-  std::string toLoad = GetTrackName(file, track);
+  std::string toLoad = GetTrackName(filename, track);
 
   if (!sacd_disc_t::g_is_sacd(toLoad) || !open(toLoad))
     return false;
 
-  if (toLoad == file)
+  std::vector<kodi::vfs::CDirEntry> items;
+  if (kodi::vfs::GetDirectory(kodi::vfs::GetDirectoryName(toLoad), "", items))
+  {
+    std::string artworkPath;
+    std::string iconUsed;
+    int isoCount = 0;
+    for (const auto& item : items)
+    {
+      if (item.IsFolder())
+      {
+        if (kodi::tools::StringUtils::EqualsNoCase(item.Label(), "Artwork"))
+          artworkPath = item.Path();
+        continue;
+      }
+
+      // Check amount of iso's, if more as one in folder can related image not identified.
+      const std::string ext = getFileExt(item.Label());
+      if (kodi::tools::StringUtils::EqualsNoCase(ext, "iso") ||
+          kodi::tools::StringUtils::EqualsNoCase(ext, "sacd") ||
+          kodi::tools::StringUtils::EqualsNoCase(ext, "data"))
+      {
+        ++isoCount;
+        if (isoCount > 1)
+        {
+          iconUsed = "";
+          break;
+        }
+        continue;
+      }
+
+      if (IsUsableIconFile(item, iconUsed))
+        break;
+      else
+        continue;
+    }
+
+    if (iconUsed == "" && !artworkPath.empty())
+    {
+      if (kodi::vfs::GetDirectory(artworkPath, "", items))
+      {
+        for (const auto& item : items)
+        {
+          if (item.IsFolder())
+            continue;
+
+          if (IsUsableIconFile(item, iconUsed))
+            break;
+          else
+            continue;
+        }
+      }
+    }
+    if (!iconUsed.empty())
+    {
+      tag.SetCoverArtByPath(iconUsed);
+    }
+  }
+
+  if (toLoad == filename)
   {
     kodi::addon::AudioDecoderInfoTag tagInternal;
     uint32_t subSong = GetSubsong(1);
@@ -286,15 +368,16 @@ bool CSACDAudioDecoder::ReadTag(const std::string& file, kodi::addon::AudioDecod
   return true;
 }
 
-int CSACDAudioDecoder::TrackCount(const std::string& file)
+int CSACDAudioDecoder::TrackCount(const std::string& filename)
 {
+  // Ignore calls within already opened track
   int track = 0;
-  std::string toLoad = GetTrackName(file, track);
-  if (toLoad != file)
+  if (GetTrackName(filename, track) != filename)
     return 0;
 
-  if (!open(file))
+  if (!open(filename))
     return 0;
+
   return GetSubsongCount(CSACDSettings::GetInstance().GetAreaAllowFallback());
 }
 
@@ -464,20 +547,29 @@ std::string CSACDAudioDecoder::GetTrackName(const std::string& file, int& track)
   /*
    * get the track name from path
    */
-  track = 0;
-  std::string toLoad(file);
-  if (toLoad.find(".sacdstream") != std::string::npos)
-  {
-    size_t iStart = toLoad.rfind('-') + 1;
-    track = atoi(toLoad.substr(iStart, toLoad.size() - iStart - 11).c_str()) - 1;
-    //  The directory we are in, is the file
-    //  that contains the bitstream to play,
-    //  so extract it
-    size_t slash = file.rfind('\\');
-    if (slash == std::string::npos)
-      slash = file.rfind('/');
-    toLoad = file.substr(0, slash);
-  }
+  const std::string toLoad = kodi::addon::CInstanceAudioDecoder::GetTrack("sacd", file, track);
+  if (track > 0)
+    --track; // Correct track, as the numbers begin with 1.
 
   return toLoad;
+}
+
+bool CSACDAudioDecoder::IsUsableIconFile(const kodi::vfs::CDirEntry& item, std::string& iconUsed)
+{
+  if (kodi::tools::StringUtils::EqualsNoCase(item.Label(), "folder.jpg"))
+  {
+    iconUsed = item.Path();
+    return true;
+  }
+  if (iconUsed.empty())
+  {
+    if (kodi::tools::StringUtils::EqualsNoCase(item.Label(), "front.jpg") ||
+        kodi::tools::StringUtils::EqualsNoCase(item.Label(), "icon.png") ||
+        kodi::tools::StringUtils::EqualsNoCase(item.Label(), "icon.jpg") ||
+        kodi::tools::StringUtils::EqualsNoCase(item.Label(), "thumb.jpg"))
+    {
+      iconUsed = item.Path();
+    }
+  }
+  return false;
 }

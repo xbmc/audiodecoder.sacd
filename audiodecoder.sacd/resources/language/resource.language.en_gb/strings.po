@@ -32,6 +32,18 @@ msgstr ""
 #When writing a description or setting, refer to a setting name in quotes. See existing entries for guidance.
 #For example, "Press \"OK\" for \"All seasons\"" instead of "Press OK for All seasons" after first word.
 
+#. Supported file extension description
+#: audiodecoder.sacd/addon.xml.in
+msgctxt "#30000"
+msgid "ISO file support for Super Audio CD (SACD) content, nothing to do with ISO about CD, DVD or BluRay."
+msgstr ""
+
+#. Supported file extension description
+#: audiodecoder.sacd/addon.xml.in
+msgctxt "#30001"
+msgid "Same as .iso, only with \".sacd\" as extension"
+msgstr ""
+
 #. Settings slider to change/adjust main volume about played songs, before given to Kodi.
 #: resources/settings.xml
 msgctxt "#30020"

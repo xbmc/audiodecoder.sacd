@@ -19,13 +19,14 @@ constexpr int UPDATE_STATS_MS = 500;
 constexpr int BITRATE_AVGS = 16;
 constexpr float PCM_OVERLOAD_THRESHOLD = 1.0f;
 
-class ATTRIBUTE_HIDDEN CSACDAudioDecoder : public kodi::addon::CInstanceAudioDecoder,
-                                           public sacd_core_t
+class ATTR_DLL_LOCAL CSACDAudioDecoder : public kodi::addon::CInstanceAudioDecoder,
+                                         public sacd_core_t
 {
 public:
   CSACDAudioDecoder(KODI_HANDLE instance, const std::string& version);
   virtual ~CSACDAudioDecoder() = default;
 
+  bool SupportsFile(const std::string& filename) override;
   bool Init(const std::string& filename,
             unsigned int filecache,
             int& channels,
@@ -35,7 +36,7 @@ public:
             int& bitrate,
             AudioEngineDataFormat& format,
             std::vector<AudioEngineChannel>& channellist) override;
-  int ReadPCM(uint8_t* buffer, int size, int& actualsize) override;
+  int ReadPCM(uint8_t* buffer, size_t size, size_t& actualsize) override;
   int64_t Seek(int64_t time) override;
   bool ReadTag(const std::string& file, kodi::addon::AudioDecoderInfoTag& tag) override;
   int TrackCount(const std::string& file) override;
@@ -51,6 +52,7 @@ private:
                  const std::vector<AudioEngineChannel>& channel_config);
   bool LoadFir(const std::string& path);
   std::string GetTrackName(const std::string& file, int& track);
+  bool IsUsableIconFile(const kodi::vfs::CDirEntry& item, std::string& iconUsed);
 
   // Setting values
   float m_setting_dBVolumeAdjust = 0.0f;

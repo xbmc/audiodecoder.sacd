@@ -17,7 +17,7 @@
 #include <memory>
 #include <stdint.h>
 
-class ATTRIBUTE_HIDDEN sacd_media_t
+class ATTR_DLL_LOCAL sacd_media_t
 {
 public:
   virtual ~sacd_media_t(){};
@@ -37,7 +37,7 @@ public:
   virtual void on_idle() = 0;
 };
 
-class ATTRIBUTE_HIDDEN sacd_media_disc_t : public sacd_media_t
+class ATTR_DLL_LOCAL sacd_media_disc_t : public sacd_media_t
 {
 public:
   sacd_media_disc_t() = default;
@@ -62,7 +62,7 @@ private:
   int64_t file_position = -1;
 };
 
-class ATTRIBUTE_HIDDEN sacd_media_file_t : public sacd_media_t
+class ATTR_DLL_LOCAL sacd_media_file_t : public sacd_media_t
 {
 public:
   sacd_media_file_t();

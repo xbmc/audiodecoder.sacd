@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="audiodecoder.sacd"
-  version="20.0.0"
+  version="20.1.0"
   name="SACD ISO support"
   provider-name="Team Kodi, AlwinEsch">
   <requires>@ADDON_DEPENDS@</requires>
   <extension
     point="kodi.audiodecoder"
     name="sacd"
-    extension=".iso|.sacd|.sacdstream"
     tracks="true"
     tags="true"
-    library_@PLATFORM@="@LIBRARY_FILENAME@"/>
+    library_@PLATFORM@="@LIBRARY_FILENAME@">
+    <support>
+      <extension name=".iso">
+        <description>30000</description>
+        <icon>ext-icon.png</icon>
+      </extension>
+      <extension name=".sacd">
+        <description>30001</description>
+        <icon>ext-icon.png</icon>
+      </extension>
+    </support>
+  </extension>
   <extension point="xbmc.addon.metadata">
     <platform>@PLATFORM@</platform>
     <license>GPL-2.0-or-later</license>

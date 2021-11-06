@@ -19,7 +19,7 @@
 #include "sacd_reader.h"
 #include "scarletbook.h"
 
-class ATTRIBUTE_HIDDEN sacd_dsdiff_t : public sacd_reader_t
+class ATTR_DLL_LOCAL sacd_dsdiff_t : public sacd_reader_t
 {
   sacd_media_t* m_file;
   uint32_t m_mode;
