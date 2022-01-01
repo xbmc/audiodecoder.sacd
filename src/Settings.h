@@ -21,7 +21,7 @@ public:
   }
 
   bool Load();
-  bool SetSetting(const std::string& settingName, const kodi::CSettingValue& settingValue);
+  bool SetSetting(const std::string& settingName, const kodi::addon::CSettingValue& settingValue);
 
   float GetVolumeAdjust() const { return m_volumeAdjust; }
   float GetLFEAdjust() const { return m_lfeAdjust; }
