@@ -15,15 +15,12 @@ CMyAddon::CMyAddon()
   CSACDSettings::GetInstance().Load();
 }
 
-ADDON_STATUS CMyAddon::CreateInstance(int instanceType,
-                                      const std::string& instanceID,
-                                      KODI_HANDLE instance,
-                                      const std::string& version,
-                                      KODI_HANDLE& addonInstance)
+ADDON_STATUS CMyAddon::CreateInstance(const kodi::addon::IInstanceInfo& instance,
+                                      KODI_ADDON_INSTANCE_HDL& hdl)
 {
-  if (instanceType == ADDON_INSTANCE_AUDIODECODER)
+  if (instance.IsType(ADDON_INSTANCE_AUDIODECODER))
   {
-    addonInstance = new CSACDAudioDecoder(instance, version);
+    hdl = new CSACDAudioDecoder(instance);
     return ADDON_STATUS_OK;
   }
 
@@ -31,7 +28,7 @@ ADDON_STATUS CMyAddon::CreateInstance(int instanceType,
 }
 
 ADDON_STATUS CMyAddon::SetSetting(const std::string& settingName,
-                                  const kodi::CSettingValue& settingValue)
+                                  const kodi::addon::CSettingValue& settingValue)
 {
   return CSACDSettings::GetInstance().SetSetting(settingName, settingValue) ? ADDON_STATUS_OK
                                                                             : ADDON_STATUS_UNKNOWN;

@@ -23,7 +23,7 @@ class ATTR_DLL_LOCAL CSACDAudioDecoder : public kodi::addon::CInstanceAudioDecod
                                          public sacd_core_t
 {
 public:
-  CSACDAudioDecoder(KODI_HANDLE instance, const std::string& version);
+  CSACDAudioDecoder(const kodi::addon::IInstanceInfo& instance);
   virtual ~CSACDAudioDecoder() = default;
 
   bool SupportsFile(const std::string& filename) override;

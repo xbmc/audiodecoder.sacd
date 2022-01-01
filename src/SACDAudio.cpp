@@ -26,10 +26,10 @@ std::string getFileExt(const std::string& s)
   return ("");
 }
 
-}
+} // namespace
 
-CSACDAudioDecoder::CSACDAudioDecoder(KODI_HANDLE instance, const std::string& version)
-  : CInstanceAudioDecoder(instance, version)
+CSACDAudioDecoder::CSACDAudioDecoder(const kodi::addon::IInstanceInfo& instance)
+  : CInstanceAudioDecoder(instance)
 {
 }
 
@@ -110,7 +110,7 @@ bool CSACDAudioDecoder::Init(const std::string& filename,
   if (CSACDSettings::GetInstance().GetConverterType() == conv_type_e::USER)
   {
     std::string path = CSACDSettings::GetInstance().GetConverterFirFile();
-    if (!path.empty() && LoadFir(kodi::GetAddonPath(path)))
+    if (!path.empty() && LoadFir(kodi::addon::GetAddonPath(path)))
     {
       fir_data = m_firData.data();
       fir_size = m_firData.size();
