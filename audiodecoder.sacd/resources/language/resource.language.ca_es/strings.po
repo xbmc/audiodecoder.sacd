@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Addons\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2022-08-21 17:14+0000\n"
+"PO-Revision-Date: 2022-09-08 09:14+0000\n"
 "Last-Translator: Xean <xeanhort007@gmail.com>\n"
 "Language-Team: Catalan (Spain) <https://kodi.weblate.cloud/projects/kodi-add-ons-audio-decodersencoders/audiodecoder-sacd/ca_es/>\n"
 "Language: ca_es\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.13\n"
+"X-Generator: Weblate 4.14\n"
 
 msgctxt "Addon Summary"
 msgid "Super Audio CD ISO image"
@@ -131,17 +131,17 @@ msgstr ""
 #. List selection value about preferable area, by setting defined with id 30037
 msgctxt "#30039"
 msgid "All"
-msgstr ""
+msgstr "Tots"
 
 #. List selection value about preferable area, by setting defined with id 30037
 msgctxt "#30040"
 msgid "Stereo"
-msgstr ""
+msgstr "Estèreo"
 
 #. List selection value about preferable area, by setting defined with id 30037
 msgctxt "#30041"
 msgid "Multichannel"
-msgstr ""
+msgstr "Multicanal"
 
 #. List selection value about samplerate, by setting defined with id 30024
 msgctxt "#30042"
