@@ -5,24 +5,25 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Addons\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/audiodecoder.sacd/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-01-11 11:15+0000\n"
+"Last-Translator: gogogogi <trebelnik2@gmail.com>\n"
+"Language-Team: Croatian <https://kodi.weblate.cloud/projects/kodi-add-ons-audio-decodersencoders/audiodecoder-sacd/hr_hr/>\n"
 "Language: hr_hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.15\n"
 
 msgctxt "Addon Summary"
 msgid "Super Audio CD ISO image"
-msgstr ""
+msgstr "Super Audio CD ISO slika"
 
 msgctxt "Addon Description"
 msgid "This addon allows Kodi to read content from a Super Audio CD ISO image.[CR][CR]Super Audio CD (SACD) is a read-only optical disc format for audio storage, introduced in 1999, developed jointly by Sony and Philips Electronics to be the successor to the Compact Disc.[CR][CR]The SACD format offers more audio channels (e.g. surround sound), a higher bit rate, and longer playing time than a conventional CD."
-msgstr ""
+msgstr "Ovaj dodatak omogućuje Kodiju da čita sadržaj iz Super Audio CD ISO slika.[CR][CR]Super Audio CD (SACD) je samo-za-čitanje format optičkog diska zvučne pohrane, predstavljen 1999, razvijen od strane Sonyja i Philips Electronicsa da bude nasljednik Compact Disca.[CR][CR]SACD format nudi više zvučnih kanala (npr. surround zvuk), veću brzinu prijenosa, i dulje vrijeme reprodukcije od konvencionalnog CD-a."
 
 # [Consistency] Make terms, settings names, brands and other minutiae, consistent throughout file.
 # [Capitalization] Avoid capitalizing every second word. See http://grammarist.com/capitalization/
@@ -34,155 +35,155 @@ msgstr ""
 #. Settings slider to change/adjust main volume about played songs, before given to Kodi.
 msgctxt "#30020"
 msgid "Volume adjust"
-msgstr ""
+msgstr "Prilagodba glasnoće zvuka"
 
 #. Help text to slider setting on id 30020.
 msgctxt "#30021"
 msgid "To change speaker volume with setting value during playback."
-msgstr ""
+msgstr "Za promjenu glasnoće zvuka zvučnika tijekom repordukcije."
 
 #. Settings slider to change/adjust LFE volume about played songs, before given to Kodi.
 msgctxt "#30022"
 msgid "LFE adjust"
-msgstr ""
+msgstr "LFE prilagodba"
 
 #. Help text to slider setting on id 30022.
 msgctxt "#30023"
 msgid "To change LFE volume with setting value during playback."
-msgstr ""
+msgstr "Za promjenu LFE glasnoće zvuka s vrijednostima postavke tijekom repordukcije."
 
 #. Settings list selection about used samplerate where given to Kodi
 msgctxt "#30024"
 msgid "PCM Samplerate"
-msgstr ""
+msgstr "PCM normalizacija"
 
 #. Help text to list selection setting on id 30024.
 msgctxt "#30025"
 msgid "Sample rate to which the stream is reduced."
-msgstr ""
+msgstr "Normalizacija zvuka za koje je strujanje smanjeno."
 
 #. Settings list selection about DSD2PCM mode, where does the SACD data conversion and downsampling to format used for playback in Kodi
 msgctxt "#30026"
 msgid "DSD2PCM mode"
-msgstr ""
+msgstr "DSD2PCM način"
 
 #. Help text to slider setting on id 30026.
 msgctxt "#30027"
 msgid "Processing mode of the stream to perform the best possible resampling."
-msgstr ""
+msgstr "Način obrade strujanja za izvođenje najbolje moguće normalizacije zvuka."
 
 #. List selection value about DSD2PCM mode, by setting defined with id 30026
 msgctxt "#30028"
 msgid "Multistage (32fp)"
-msgstr ""
+msgstr "Multistage (32fp)"
 
 #. List selection value about DSD2PCM mode, by setting defined with id 30026
 msgctxt "#30029"
 msgid "Multistage (64fp)"
-msgstr ""
+msgstr "Multistage (64fp)"
 
 #. List selection value about DSD2PCM mode, by setting defined with id 30026
 msgctxt "#30030"
 msgid "Direct (32fp, 30kHz lowpass)"
-msgstr ""
+msgstr "Direct (32fp, 30kHz lowpass)"
 
 #. List selection value about DSD2PCM mode, by setting defined with id 30026
 msgctxt "#30031"
 msgid "Direct (64fp, 30kHz lowpass)"
-msgstr ""
+msgstr "Direct (64fp, 30kHz lowpass)"
 
 #. List selection value about DSD2PCM mode, by setting defined with id 30026
 msgctxt "#30032"
 msgid "Installable FIR (32fp)"
-msgstr ""
+msgstr "Installable FIR (32fp)"
 
 #. List selection value about DSD2PCM mode, by setting defined with id 30026
 msgctxt "#30033"
 msgid "Installable FIR (64fp)"
-msgstr ""
+msgstr "Installable FIR (64fp)"
 
 #. Settings button to open file selection dialog about a usable FIR filter
 msgctxt "#30034"
 msgid "Select file with usable FIR filter"
-msgstr ""
+msgstr "Odaberi datoteku s iskoristivim FIR filtrom"
 
 #. Help text to list selection setting on id 30034.
 msgctxt "#30035"
 msgid "To select finite impulse response (FIR) filter data stored in a file."
-msgstr ""
+msgstr "Za odabir finite impulse response (FIR) filtra pohranjenog u datoteci."
 
 #. Header label to use one file selection dialog, where opened on button defined with id 30034
 msgctxt "#30036"
 msgid "FIR filter file"
-msgstr ""
+msgstr "FIR datoteka filtra"
 
 #. To select prefereable area which should used, e.g. only stereo (and as fallback multichannel, if stereo not available)
 #. or to select multichannel (and as fallback stereo, if multichannel not available) or allow both (All) where default.
 msgctxt "#30037"
 msgid "Preferable area"
-msgstr ""
+msgstr "Preferirano područje"
 
 #. Help text to list selection setting on id 30037.
 msgctxt "#30038"
 msgid "To select the songs for the respective number of speakers."
-msgstr ""
+msgstr "Za odabir pjesama za respektabilan broj zvučnika."
 
 #. List selection value about preferable area, by setting defined with id 30037
 msgctxt "#30039"
 msgid "All"
-msgstr ""
+msgstr "Svi"
 
 #. List selection value about preferable area, by setting defined with id 30037
 msgctxt "#30040"
 msgid "Stereo"
-msgstr ""
+msgstr "Stereo"
 
 #. List selection value about preferable area, by setting defined with id 30037
 msgctxt "#30041"
 msgid "Multichannel"
-msgstr ""
+msgstr "Višekanalni"
 
 #. List selection value about samplerate, by setting defined with id 30024
 msgctxt "#30042"
 msgid "44.1 kHz"
-msgstr ""
+msgstr "44.1 kHz"
 
 #. List selection value about samplerate, by setting defined with id 30024
 msgctxt "#30043"
 msgid "88.2 kHz"
-msgstr ""
+msgstr "88.2 kHz"
 
 #. List selection value about samplerate, by setting defined with id 30024
 msgctxt "#30044"
 msgid "176.4 kHz"
-msgstr ""
+msgstr "176.4 kHz"
 
 #. List selection value about samplerate, by setting defined with id 30024
 msgctxt "#30045"
 msgid "352.8 kHz"
-msgstr ""
+msgstr "352.8 kHz"
 
 #. Boolean setting to enable sort all stereo tracks first, then all multichannel tracks.
 msgctxt "#30050"
 msgid "Separate stereo and multichannel tracks"
-msgstr ""
+msgstr "Zasebni stereo i višekanalni zapisi"
 
 #. Help text to boolean setting on id 30050.
 msgctxt "#30051"
 msgid "Sort stereo tracks first, then all multichannel tracks."
-msgstr ""
+msgstr "Poredaj prvo stereo zapise, zatim višekanalne zapise."
 
 #. Boolean setting to allow play fallback if Multichannel selected and only Stereo available, or the other direction
 msgctxt "#30052"
 msgid "Fall back when preferred track area is empty"
-msgstr ""
+msgstr "Vrati se kada je željeno područje zapisa prazno"
 
 #. Help text to boolean setting on id 30052.
 msgctxt "#30053"
 msgid "If preferred tracks (stereo or multichannel) are not available, a different method is used to fall back."
-msgstr ""
+msgstr "Ako željeni zapisi (sterero ili višekanalni) nisu dostupni, drugačiji način se koristi za vraćanje."
 
 #. Format label about selectable volume in dB, for settings defined with label id 30020 and 30022
 msgctxt "#30070"
 msgid "{0:.0f} dB"
-msgstr ""
+msgstr "{0:.0f} dB"
