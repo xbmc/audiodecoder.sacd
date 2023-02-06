@@ -33,7 +33,10 @@ elseif(CORE_SYSTEM_NAME MATCHES "osx")
 endif()
 
 list(APPEND configure_command ${CMAKE_COMMAND} -E env)
-list(APPEND configure_command ANDROID_NDK=${TOOLCHAIN})
+if(CORE_SYSTEM_NAME MATCHES "android")
+  list(APPEND configure_command ANDROID_NDK_HOME=${NDKROOT})
+  list(APPEND configure_command PATH=${TOOLCHAIN}/bin:$ENV{PATH})
+endif()
 list(APPEND configure_command AR=${CMAKE_AR})
 list(APPEND configure_command CC=${CMAKE_C_COMPILER})
 list(APPEND configure_command CFLAGS=${CMAKE_C_FLAGS})
@@ -52,8 +55,16 @@ endif()
 list(APPEND configure_command --prefix=${OUTPUT_DIR})
 list(APPEND configure_command --with-zlib-include=${OUTPUT_DIR}/include)
 list(APPEND configure_command --with-zlib-lib=${OUTPUT_DIR}/lib)
+if(CORE_SYSTEM_NAME MATCHES "android")
+  list(APPEND configure_command -D__ANDROID_API__=21)
+  list(APPEND configure_command -isystem ${NDKROOT}/sysroot/usr/include)
+  list(APPEND configure_command -isystem ${NDKROOT}/sysroot/usr/include/${HOST})
+endif()
 list(APPEND configure_command COMMAND sed -ie "s|PROGRAMS=|PROGRAMS=#|" ${PROJECT_SOURCE_DIR}/Makefile)
-list(APPEND configure_command COMMAND sed -ie "s|-isysroot $.CROSS_TOP./SDKs/$.CROSS_SDK. ||" ${PROJECT_SOURCE_DIR}/Makefile)
+
+list(APPEND build_command ${CMAKE_COMMAND} -E env)
+list(APPEND build_command PATH=${TOOLCHAIN}/bin:$ENV{PATH})
+list(APPEND build_command make)
 
 include(ExternalProject)
 
@@ -61,6 +72,7 @@ externalproject_add(openssl
                     SOURCE_DIR ${CMAKE_SOURCE_DIR}
                     UPDATE_COMMAND ""
                     CONFIGURE_COMMAND ${configure_command}
+                    BUILD_COMMAND ${build_command}
                     INSTALL_COMMAND ""
                     BUILD_IN_SOURCE 1)
 
