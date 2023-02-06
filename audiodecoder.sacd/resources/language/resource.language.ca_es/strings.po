@@ -5,24 +5,25 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Addons\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/audiodecoder.sacd/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-09-08 09:14+0000\n"
+"Last-Translator: Xean <xeanhort007@gmail.com>\n"
+"Language-Team: Catalan (Spain) <https://kodi.weblate.cloud/projects/kodi-add-ons-audio-decodersencoders/audiodecoder-sacd/ca_es/>\n"
 "Language: ca_es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14\n"
 
 msgctxt "Addon Summary"
 msgid "Super Audio CD ISO image"
-msgstr ""
+msgstr "Imatge ISO de Super Audio CD"
 
 msgctxt "Addon Description"
 msgid "This addon allows Kodi to read content from a Super Audio CD ISO image.[CR][CR]Super Audio CD (SACD) is a read-only optical disc format for audio storage, introduced in 1999, developed jointly by Sony and Philips Electronics to be the successor to the Compact Disc.[CR][CR]The SACD format offers more audio channels (e.g. surround sound), a higher bit rate, and longer playing time than a conventional CD."
-msgstr ""
+msgstr "Aquest complement permet que Kodi llegeixi el contingut d'una imatge ISO de Super Audio CD.[CR][CR]Super Audio CD (SACD) és un format de disc òptic de només lectura per a l'emmagatzematge d'àudio, introduït el 1999, desenvolupat conjuntament per Sony i Philips Electronics per ser el successor del Compact Disc.[CR][CR]El format SACD ofereix més canals d'àudio (per exemple, so envoltant), una taxa de bits més alta i un temps de reproducció més llarg que un CD convencional."
 
 # [Consistency] Make terms, settings names, brands and other minutiae, consistent throughout file.
 # [Capitalization] Avoid capitalizing every second word. See http://grammarist.com/capitalization/
@@ -130,17 +131,17 @@ msgstr ""
 #. List selection value about preferable area, by setting defined with id 30037
 msgctxt "#30039"
 msgid "All"
-msgstr ""
+msgstr "Tots"
 
 #. List selection value about preferable area, by setting defined with id 30037
 msgctxt "#30040"
 msgid "Stereo"
-msgstr ""
+msgstr "Estèreo"
 
 #. List selection value about preferable area, by setting defined with id 30037
 msgctxt "#30041"
 msgid "Multichannel"
-msgstr ""
+msgstr "Multicanal"
 
 #. List selection value about samplerate, by setting defined with id 30024
 msgctxt "#30042"
