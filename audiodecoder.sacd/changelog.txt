@@ -1,3 +1,7 @@
+v20.3.0:
+- Update openssl to 1.1.1n
+- Fix build for macOS arm64
+
 v20.2.0:
 - Translation updates by Weblate
 - Kodi main API update to version 2.0.0
