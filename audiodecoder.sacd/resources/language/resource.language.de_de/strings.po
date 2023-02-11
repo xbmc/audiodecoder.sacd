@@ -70,7 +70,7 @@ msgstr "DSD2PCM-Modus"
 #. Help text to slider setting on id 30026.
 msgctxt "#30027"
 msgid "Processing mode of the stream to perform the best possible resampling."
-msgstr "Verarbeitungsmodus des streams um bestmögliches resampling durchzuführen."
+msgstr "Verarbeitungsmodus des Streams, um das bestmögliche Resampling durchzuführen."
 
 #. List selection value about DSD2PCM mode, by setting defined with id 30026
 msgctxt "#30028"
@@ -146,32 +146,32 @@ msgstr "Mehrkanal"
 #. List selection value about samplerate, by setting defined with id 30024
 msgctxt "#30042"
 msgid "44.1 kHz"
-msgstr "44.1 kHz"
+msgstr "44,1 kHz"
 
 #. List selection value about samplerate, by setting defined with id 30024
 msgctxt "#30043"
 msgid "88.2 kHz"
-msgstr "88.2 kHz"
+msgstr "88,2 kHz"
 
 #. List selection value about samplerate, by setting defined with id 30024
 msgctxt "#30044"
 msgid "176.4 kHz"
-msgstr "176.4 kHz"
+msgstr "176,4 kHz"
 
 #. List selection value about samplerate, by setting defined with id 30024
 msgctxt "#30045"
 msgid "352.8 kHz"
-msgstr "352.8 kHz"
+msgstr "352,8 kHz"
 
 #. Boolean setting to enable sort all stereo tracks first, then all multichannel tracks.
 msgctxt "#30050"
 msgid "Separate stereo and multichannel tracks"
-msgstr "Stereo- und Multikanal-Tracks separieren"
+msgstr "Stereo- und Mehrkanaltonspuren trennen"
 
 #. Help text to boolean setting on id 30050.
 msgctxt "#30051"
 msgid "Sort stereo tracks first, then all multichannel tracks."
-msgstr "Erst alle Stereo-Tracks, dann alle Multikanal-Tracks einsortieren."
+msgstr "Erst alle Stereo-Tonspuren, dann alle Mehrkanal-Tonspuren einsortieren."
 
 #. Boolean setting to allow play fallback if Multichannel selected and only Stereo available, or the other direction
 msgctxt "#30052"
