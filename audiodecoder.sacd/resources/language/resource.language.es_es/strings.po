@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: KODI Addons\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2022-01-22 23:13+0000\n"
-"Last-Translator: Alfonso Cachero <alfonso.cachero@gmail.com>\n"
+"PO-Revision-Date: 2024-03-28 12:10+0000\n"
+"Last-Translator: roliverosc <roliverosc@hotmail.com>\n"
 "Language-Team: Spanish (Spain) <https://kodi.weblate.cloud/projects/kodi-add-ons-audio-decodersencoders/audiodecoder-sacd/es_es/>\n"
 "Language: es_es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 5.4\n"
 
 msgctxt "Addon Summary"
 msgid "Super Audio CD ISO image"
@@ -23,7 +23,7 @@ msgstr "Imagen ISO Super Audio CD"
 
 msgctxt "Addon Description"
 msgid "This addon allows Kodi to read content from a Super Audio CD ISO image.[CR][CR]Super Audio CD (SACD) is a read-only optical disc format for audio storage, introduced in 1999, developed jointly by Sony and Philips Electronics to be the successor to the Compact Disc.[CR][CR]The SACD format offers more audio channels (e.g. surround sound), a higher bit rate, and longer playing time than a conventional CD."
-msgstr "Este addon permite a Kodi leer contenido de una imagen ISO de Super Audio CD.[CR][CR]Super Audio CD (SCAD) es un formato de disco óptico de solo lectura para almacenamiento de audio, introducido en 1999 y desarrollado conjuntamente por Sony y Philips Electronics para ser el sucesor del Compact Disc.[CR][CR]El formato SACD ofrece mas canales de audio (p.ej. sonido Surround), una tasa de bits más alta, y más tiempo de reproducción que un CD convencional."
+msgstr "Este complemento permite a Kodi leer contenido de una imagen ISO de Super Audio CD.[CR][CR]Super Audio CD (SCAD) es un formato de disco óptico de solo lectura para almacenamiento de audio, introducido en 1999 y desarrollado conjuntamente por Sony y Philips Electronics para ser el sucesor del Compact Disc.[CR][CR]El formato SACD ofrece más canales de audio (p.ej. sonido Surround), una tasa de bits más alta, y más tiempo de reproducción que un CD convencional."
 
 # [Consistency] Make terms, settings names, brands and other minutiae, consistent throughout file.
 # [Capitalization] Avoid capitalizing every second word. See http://grammarist.com/capitalization/
@@ -40,7 +40,7 @@ msgstr "Ajuste de volumen"
 #. Help text to slider setting on id 30020.
 msgctxt "#30021"
 msgid "To change speaker volume with setting value during playback."
-msgstr "Cambiar el volumen del altavoz con el ajuste definido durante la reproducción."
+msgstr "Cambia el volumen del altavoz con el valor definido durante la reproducción."
 
 #. Settings slider to change/adjust LFE volume about played songs, before given to Kodi.
 msgctxt "#30022"
@@ -50,7 +50,7 @@ msgstr "Ajuste LFE"
 #. Help text to slider setting on id 30022.
 msgctxt "#30023"
 msgid "To change LFE volume with setting value during playback."
-msgstr "Cambiar el volumen LFE con el ajuste definido durante la reproducción."
+msgstr "Cambia el volumen LFE con el valor definido durante la reproducción."
 
 #. Settings list selection about used samplerate where given to Kodi
 msgctxt "#30024"
@@ -90,7 +90,7 @@ msgstr "Directo (32fp, 30kHz paso-bajo)"
 #. List selection value about DSD2PCM mode, by setting defined with id 30026
 msgctxt "#30031"
 msgid "Direct (64fp, 30kHz lowpass)"
-msgstr "Directo (64fp, 30kHz pasobajo)"
+msgstr "Directo (64fp, 30kHz paso-bajo)"
 
 #. List selection value about DSD2PCM mode, by setting defined with id 30026
 msgctxt "#30032"
@@ -105,12 +105,12 @@ msgstr "FIR instalable (64fp)"
 #. Settings button to open file selection dialog about a usable FIR filter
 msgctxt "#30034"
 msgid "Select file with usable FIR filter"
-msgstr "Escoja el archivo del filtro FIR usable"
+msgstr "Escoja archivo con filtro FIR utilizable"
 
 #. Help text to list selection setting on id 30034.
 msgctxt "#30035"
 msgid "To select finite impulse response (FIR) filter data stored in a file."
-msgstr "Elegir un filtro de respuesta al impulso finita (FIR) guardado en un archivo."
+msgstr "Seleccione un filtro de respuesta al impulso finita (FIR) almacenado en un archivo."
 
 #. Header label to use one file selection dialog, where opened on button defined with id 30034
 msgctxt "#30036"
@@ -126,7 +126,7 @@ msgstr "Área preferible"
 #. Help text to list selection setting on id 30037.
 msgctxt "#30038"
 msgid "To select the songs for the respective number of speakers."
-msgstr "Elegir canciones por el número de altavoces."
+msgstr "Selecciona canciones por el número respectivos de altavoces."
 
 #. List selection value about preferable area, by setting defined with id 30037
 msgctxt "#30039"
@@ -166,7 +166,7 @@ msgstr "352.8 kHz"
 #. Boolean setting to enable sort all stereo tracks first, then all multichannel tracks.
 msgctxt "#30050"
 msgid "Separate stereo and multichannel tracks"
-msgstr "Separar pistas estéreo y multicanal"
+msgstr "Pistas estéreo y multicanal separadas"
 
 #. Help text to boolean setting on id 30050.
 msgctxt "#30051"
