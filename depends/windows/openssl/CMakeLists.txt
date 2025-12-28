@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.15)
 
-project(openssl VERSION 1.1.1 LANGUAGES C)
+project(openssl VERSION 3.0.18 LANGUAGES C)
 
 find_package(StrawberryPerl REQUIRED)
 
@@ -17,7 +17,7 @@ elseif(_AMD64_)
 	set(OPENSSL_PLATFORM VC-WIN64A)
 elseif(_ARM64_)
 	message(STATUS "arm64")
-	set(OPENSSL_PLATFORM VC-WIN64-ARM)    
+	set(OPENSSL_PLATFORM VC-WIN64-ARM)
 else()
 	message(FATAL_ERROR "Unsupported target architecture")
 endif()
