@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
 
-project(openssl VERSION 3.0.18 LANGUAGES C)
+project(openssl VERSION 3.5.8 LANGUAGES C)
 
 find_package(StrawberryPerl REQUIRED)
 
@@ -22,9 +22,16 @@ else()
 	message(FATAL_ERROR "Unsupported target architecture")
 endif()
 
-message(STATUS "perl Configure ${OPENSSL_PLATFORM} disable-capieng enable-static-engine no-asm no-dso no-shared no-tests no-ui-console zlib --prefix=${CMAKE_INSTALL_PREFIX} --with-zlib-include=${OUTPUT_DIR}/include")
+if(CMAKE_SYSTEM_NAME STREQUAL "WindowsStore")
+	set(OPENSSL_PLATFORM "${OPENSSL_PLATFORM}-UWP")
+endif()
+
+set(configure_options no-shared no-asm no-apps no-capieng no-tests no-ui-console no-winstore zlib --prefix=${CMAKE_INSTALL_PREFIX} --with-zlib-include=${OUTPUT_DIR}/include)
+
 set(ENV{PATH} "${STRAWBERRYPERL_PATH};$ENV{PATH}")
-execute_process(COMMAND perl Configure ${OPENSSL_PLATFORM} disable-capieng enable-static-engine no-asm no-dso no-shared no-tests no-ui-console zlib --prefix=${CMAKE_INSTALL_PREFIX} --with-zlib-include=${OUTPUT_DIR}/include WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+execute_process(COMMAND perl Configure ${OPENSSL_PLATFORM} ${configure_options}
+                WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                COMMAND_ECHO STDOUT)
 
 add_custom_target(openssl ALL COMMAND nmake build_generated libcrypto.lib libssl.lib WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
