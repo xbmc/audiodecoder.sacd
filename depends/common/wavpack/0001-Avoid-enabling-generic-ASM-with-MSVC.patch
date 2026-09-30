@@ -1,0 +1,42 @@
+From cffbb1e95514e59adeff8e05ff6b0d8a1f5c5156 Mon Sep 17 00:00:00 2001
+From: Garrett Brown <garrett@Garretts-MacBook-Pro.local>
+Date: Tue, 29 Sep 2026 20:40:05 -0700
+Subject: [PATCH 1/2] Avoid enabling generic ASM with MSVC
+
+MSVC uses the architecture-specific ASM_MASM or ASM_MARMASM languages.
+Only probe and enable generic ASM for non-MSVC builds.
+---
+ CMakeLists.txt | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 0b5d26d..5b5b95f 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -33,11 +33,6 @@ endif()
+ 
+ include(CheckLanguage)
+ 
+-check_language(ASM)
+-if(CMAKE_ASM_COMPILER)
+-  enable_language(ASM)
+-endif()
+-
+ if(MSVC)
+   if(WavPack_CPU_X86 OR WavPack_CPU_X64)
+     enable_language(ASM_MASM)
+@@ -45,6 +40,11 @@ if(MSVC)
+     enable_language(ASM_MARMASM)
+   endif()
+ else()
++  check_language(ASM)
++  if(CMAKE_ASM_COMPILER)
++    enable_language(ASM)
++  endif()
++
+   check_language(ASM-ATT)
+   if(CMAKE_ASM-ATT_COMPILER)
+     enable_language(ASM-ATT)
+-- 
+2.50.1 (Apple Git-155)
+

@@ -1,0 +1,27 @@
+From ccbe357a145b05a5b136197d68e6fdaaeb671fd0 Mon Sep 17 00:00:00 2001
+From: Garrett Brown <themagnificentmrb@gmail.com>
+Date: Tue, 29 Sep 2026 20:41:32 -0700
+Subject: [PATCH 2/2] Disable x86/ARM assembly on Darwin
+
+WavPack's ATT assembly is not compatible with Darwin builds.
+Only enable it for supported non-Darwin platforms.
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 5b5b95f..8465b95 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -132,7 +132,7 @@ if(WIN32 AND NOT MINGW)
+     endif()
+ else()
+     if(CMAKE_ASM-ATT_COMPILER)
+-        if(WavPack_CPU_X86 OR WavPack_CPU_X64 OR WavPack_CPU_ARM32)
++        if(NOT CMAKE_SYSTEM_NAME MATCHES "Darwin" AND (WavPack_CPU_X86 OR WavPack_CPU_X64 OR WavPack_CPU_ARM32))
+             set(HAVE_ASM 1)
+         endif()
+     endif()
+-- 
+2.50.1 (Apple Git-155)
+
