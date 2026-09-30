@@ -7,7 +7,6 @@ list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR})
 find_package(Kodi REQUIRED)
 find_package(Iconv REQUIRED)
 find_package(WavPack REQUIRED)
-find_package(Threads REQUIRED)
 
 include_directories(${PROJECT_SOURCE_DIR}/lib/id3v2lib/include
                     ${PROJECT_SOURCE_DIR}/lib/libdsdpcm
@@ -49,7 +48,7 @@ set(SACD_HEADERS src/Addon.h
                  src/sacd/sacd_reader.h
                  src/sacd/scarletbook.h)
 
-set(DEPLIBS dsdpcm dstdec id3v2 ${WAVPACK_LIBRARIES} ${ICONV_LIBRARY} Threads::Threads)
+set(DEPLIBS dsdpcm dstdec id3v2 ${WAVPACK_LIBRARIES} ${ICONV_LIBRARY})
 
 build_addon(audiodecoder.sacd SACD DEPLIBS)
 

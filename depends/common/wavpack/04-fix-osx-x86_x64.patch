@@ -1,0 +1,11 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -139,7 +139,7 @@
+     endif()
+ else()
+     if(CMAKE_ASM-ATT_COMPILER)
+-        if(CPU_ASM_X86 OR CPU_ASM_X64 OR CPU_ASM_ARM32)
++        if(NOT CMAKE_SYSTEM_NAME MATCHES "Darwin" AND (CPU_ASM_X86 OR CPU_ASM_X64 OR CPU_ASM_ARM32))
+             set(HAVE_ASM 1)
+         endif()
+     endif()
